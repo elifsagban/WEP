@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "907625794154",
+    "project_id": "thesis-wep",
+    "storage_bucket": "thesis-wep.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907625794154:android:37a237a79dd87efbc71813",
+        "android_client_info": {
+          "package_name": "com.elif.wep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907625794154-1uo9q5ob76nqr06gd838heo27kvlbmss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATrit3DxMikI3WkVIv4n-auvfZJXXFokc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907625794154-1uo9q5ob76nqr06gd838heo27kvlbmss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
