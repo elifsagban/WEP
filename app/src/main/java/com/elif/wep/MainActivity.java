@@ -9,6 +9,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     private Button regButton;
+    private Button taskButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        taskButton = findViewById(R.id.mainTask);
+        taskButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                openTaskPage();
+            }
+        });
+
+
+    }
+
+    private void openTaskPage() {
+        Intent intent = new Intent(this, TaskList.class);
+        startActivity(intent);
     }
 
     private void openRegisterPage() {
