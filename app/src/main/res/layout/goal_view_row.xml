@@ -8,10 +8,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Task Item"
-        android:textSize="15sp"
-        android:id="@+id/taskItem"
+        android:id="@+id/goalItem"
         android:layout_margin="10dp"
-  />
+        />
 
 </LinearLayout>

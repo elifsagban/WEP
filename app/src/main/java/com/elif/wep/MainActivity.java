@@ -10,11 +10,17 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+<<<<<<< HEAD
     private ImageButton statPage;
     private ImageButton planPage;
     private ImageButton homePage;
     private ImageButton taskPage;
     private ImageButton profilePage;
+=======
+    private Button regButton;
+    private Button taskButton;
+    private Button goalButton;
+>>>>>>> version2
 
     private Button registerBtn;
 
@@ -76,10 +82,30 @@ public class MainActivity extends AppCompatActivity {
         profilePage = (ImageButton) findViewById(R.id.profilePage);
         profilePage.setOnClickListener(new View.OnClickListener() {
 
+<<<<<<< HEAD
             @Override
             public void onClick(View v) {
 
                 openProfilePage();
+=======
+        goalButton = findViewById(R.id.mainGoal);
+        goalButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                openGoalPage();
+            }
+        });
+
+
+
+    }
+
+    private void openGoalPage() {
+        Intent intent = new Intent(this, GoalList.class);
+        startActivity(intent);
+    }
+>>>>>>> version2
 
             }
         });

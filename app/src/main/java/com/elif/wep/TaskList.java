@@ -27,6 +27,8 @@ public class TaskList extends AppCompatActivity {
 
     private Button createTask;
     private RecyclerView recyclerView;
+    private SubItemController subItemController;
+
     private String titleTask;
 
     private final ArrayList<Task> tasks = new ArrayList<>();
@@ -45,8 +47,10 @@ public class TaskList extends AppCompatActivity {
 
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        taskRecyclerViewAdapter = new TaskRecyclerViewAdapter(tasks);
+         taskRecyclerViewAdapter = new TaskRecyclerViewAdapter(tasks);
         recyclerView.setAdapter(taskRecyclerViewAdapter);
+
+
 
 
         createTask.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +69,11 @@ public class TaskList extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         titleTask = taskName.getText().toString();
                         Toast.makeText(TaskList.this, titleTask + " is created", Toast.LENGTH_LONG).show();
-                        Task task = new Task(titleTask, "item list gelecek");
+                       subItemController = new SubItemController();
+
+                        Task task = new Task(titleTask, subItemController.getListOfItems());
                         tasks.add(task);
+
 
                     }
                 });
@@ -113,6 +120,7 @@ public class TaskList extends AppCompatActivity {
 
                     openHomePage();
 
+<<<<<<< HEAD
                 }
             });
             taskPage = (ImageButton) findViewById(R.id.taskPage);
@@ -159,6 +167,10 @@ public class TaskList extends AppCompatActivity {
 
 
     }
+=======
+
+}
+>>>>>>> version2
 
 
 

@@ -7,6 +7,7 @@
     tools:context=".TaskList">
 
 
+<<<<<<< HEAD
     <!--    <ListView-->
     <!--        android:id="@+id/task_view"-->
     <!--        android:layout_width="match_parent"-->
@@ -14,6 +15,8 @@
     <!--        app:layout_constraintTop_toTopOf="parent"-->
     <!--        app:layout_constraintBottom_toTopOf="@id/addTaskList"/>-->
 
+=======
+>>>>>>> version2
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTask"
         android:layout_width="0dp"
