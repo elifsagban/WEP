@@ -1,14 +1,18 @@
 package com.elif.wep;
-;
+import java.util.ArrayList;
 
 public class Task {
 
     private String title;
-    private String taskList;
+    private ArrayList<TaskChild> childArrayList;
+    private SubItemController subItemController;
 
-    public Task(String title, String taskList) {
+
+
+    public Task(String title, ArrayList<TaskChild> childArrayList ) {
         this.title = title;
-        this.taskList = taskList;
+        this.childArrayList = childArrayList;
+        this.subItemController = new SubItemController();
     }
 
     public String getTitle() {
@@ -19,12 +23,16 @@ public class Task {
         this.title = title;
     }
 
-
-    public String getTaskList() {
-        return taskList;
+    public void setChildArrayList(ArrayList<TaskChild> childArrayList) {
+        this.childArrayList = childArrayList;
     }
 
-    public void setTaskList(String taskList) {
-        this.taskList = taskList;
+    public ArrayList<TaskChild> getChildArrayList() {
+        return subItemController.getListOfItems();
     }
+
+    public void addTaskChild(String taskName) {
+        subItemController.addSubItem(taskName);
+    }
+
 }

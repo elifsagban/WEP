@@ -10,6 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button regButton;
     private Button taskButton;
+    private Button goalButton;
 
 
     @Override
@@ -34,7 +35,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        goalButton = findViewById(R.id.mainGoal);
+        goalButton.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
+                openGoalPage();
+            }
+        });
+
+
+
+    }
+
+    private void openGoalPage() {
+        Intent intent = new Intent(this, GoalList.class);
+        startActivity(intent);
     }
 
     private void openTaskPage() {
