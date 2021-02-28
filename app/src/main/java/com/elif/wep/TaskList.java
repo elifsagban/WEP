@@ -28,6 +28,7 @@ public class TaskList extends AppCompatActivity {
     private Button createTask;
     private RecyclerView recyclerView;
     private SubItemController subItemController;
+    private Button goalPage;
 
     private String titleTask;
 
@@ -49,6 +50,15 @@ public class TaskList extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
          taskRecyclerViewAdapter = new TaskRecyclerViewAdapter(tasks);
         recyclerView.setAdapter(taskRecyclerViewAdapter);
+
+        goalPage =  findViewById(R.id.mainGoal);
+        goalPage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            openGoalPage();
+            }
+        });
 
 
 
@@ -120,7 +130,6 @@ public class TaskList extends AppCompatActivity {
 
                     openHomePage();
 
-<<<<<<< HEAD
                 }
             });
             taskPage = (ImageButton) findViewById(R.id.taskPage);
@@ -164,13 +173,15 @@ public class TaskList extends AppCompatActivity {
             Intent intent = new Intent(this, Profile.class);
             startActivity(intent);
         }
+    private void openGoalPage() {
+        Intent intent = new Intent(this, GoalList.class);
+        startActivity(intent);
+    }
 
 
     }
-=======
 
-}
->>>>>>> version2
+
 
 
 
