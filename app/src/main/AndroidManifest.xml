@@ -11,7 +11,7 @@
         android:theme="@style/Theme.WEP">
         <activity android:name=".Schedule"></activity>
         <activity android:name=".Statistics" />
-        <activity android:name=".Goal" />
+        <activity android:name=".GoalList" />
         <activity android:name=".TaskList" />
         <activity android:name=".Profile" />
         <activity android:name=".Register" />

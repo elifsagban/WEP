@@ -17,21 +17,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!--    <Button-->
+<!--        android:id="@+id/mainTask"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Task"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
     <Button
         android:id="@+id/mainRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="172dp"
         android:text="Register"
-        app:layout_constraintBottom_toTopOf="@+id/mainTask"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/mainTask"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -75,5 +76,7 @@
             android:layout_marginEnd="5dp"
             android:background="@mipmap/user_icon_foreground" />
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

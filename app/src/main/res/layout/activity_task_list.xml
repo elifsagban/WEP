@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".TaskList">
 
-
-    <!--    <ListView-->
-    <!--        android:id="@+id/task_view"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/addTaskList"/>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTask"
         android:layout_width="0dp"
@@ -31,6 +23,14 @@
         android:text="Add"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/mainGoal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/addTaskList"
+            android:layout_gravity="center"
+            android:text="Goal" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

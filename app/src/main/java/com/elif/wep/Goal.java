@@ -1,14 +1,18 @@
 package com.elif.wep;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class Goal {
 
-import android.os.Bundle;
+    private String goalName;
 
-public class Goal extends AppCompatActivity {
+    public Goal(String goalName) {
+        this.goalName = goalName;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goal);
+    public String getGoalName() {
+        return goalName;
+    }
+
+    public void setGoalName(String goalName) {
+        this.goalName = goalName;
     }
 }

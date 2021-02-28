@@ -27,6 +27,9 @@ public class TaskList extends AppCompatActivity {
 
     private Button createTask;
     private RecyclerView recyclerView;
+    private SubItemController subItemController;
+    private Button goalPage;
+
     private String titleTask;
 
     private final ArrayList<Task> tasks = new ArrayList<>();
@@ -45,8 +48,19 @@ public class TaskList extends AppCompatActivity {
 
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        taskRecyclerViewAdapter = new TaskRecyclerViewAdapter(tasks);
+         taskRecyclerViewAdapter = new TaskRecyclerViewAdapter(tasks);
         recyclerView.setAdapter(taskRecyclerViewAdapter);
+
+        goalPage =  findViewById(R.id.mainGoal);
+        goalPage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            openGoalPage();
+            }
+        });
+
+
 
 
         createTask.setOnClickListener(new View.OnClickListener() {
@@ -65,8 +79,11 @@ public class TaskList extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         titleTask = taskName.getText().toString();
                         Toast.makeText(TaskList.this, titleTask + " is created", Toast.LENGTH_LONG).show();
-                        Task task = new Task(titleTask, "item list gelecek");
+                       subItemController = new SubItemController();
+
+                        Task task = new Task(titleTask, subItemController.getListOfItems());
                         tasks.add(task);
+
 
                     }
                 });
@@ -156,9 +173,15 @@ public class TaskList extends AppCompatActivity {
             Intent intent = new Intent(this, Profile.class);
             startActivity(intent);
         }
+    private void openGoalPage() {
+        Intent intent = new Intent(this, GoalList.class);
+        startActivity(intent);
+    }
 
 
     }
+
+
 
 
 
