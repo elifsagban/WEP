@@ -3,6 +3,7 @@ package com.elif.wep;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,9 +32,19 @@ public class Register extends AppCompatActivity {
         emailText = findViewById(R.id.email);
         passwordText = findViewById(R.id.password);
         registerBtn = findViewById(R.id.register);
-        loginBtn = findViewById(R.id.login);
+        loginBtn = (Button) findViewById(R.id.login);
 
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                openLoginPage();
+
+            }
+        });
         registerBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String name = nameText.getText().toString();
@@ -57,5 +68,11 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void openLoginPage(){
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+
     }
 }
