@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp">
+        android:padding="20dp"
+        app:cardBackgroundColor="#79DFDCDC">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,30 +22,36 @@
                 android:id="@+id/taskTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_margin="10dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
                 android:text="TextView"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@id/addItemBtn"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/addItemBtn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/addItemBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="add Item"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:backgroundTint="#2979FF"
+                android:clickable="true"
+                android:pointerIcon="none"
+                app:backgroundTint="#2979FF"
+                app:borderWidth="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/taskTitle"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:maxImageSize="20dp"
+                app:srcCompat="@android:drawable/ic_menu_add" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Child_RV"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:layout_marginRight="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf= "@id/addItemBtn"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.01"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/taskTitle" />

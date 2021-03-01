@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import android.widget.Button;
@@ -61,12 +62,11 @@ public class TaskList extends AppCompatActivity {
         });
 
 
-
-
         createTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder taskNameDialog = new AlertDialog.Builder(TaskList.this);
+
                 taskNameDialog.setTitle("Enter Task Name");
 
                 final EditText taskName = new EditText(TaskList.this);
@@ -78,11 +78,11 @@ public class TaskList extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         titleTask = taskName.getText().toString();
-                        Toast.makeText(TaskList.this, titleTask + " is created", Toast.LENGTH_LONG).show();
-                       subItemController = new SubItemController();
+                            Toast.makeText(TaskList.this, titleTask + " is created", Toast.LENGTH_LONG).show();
+                            subItemController = new SubItemController();
+                            Task task = new Task(titleTask, subItemController.getListOfItems());
+                            tasks.add(task);
 
-                        Task task = new Task(titleTask, subItemController.getListOfItems());
-                        tasks.add(task);
 
 
                     }
@@ -96,7 +96,11 @@ public class TaskList extends AppCompatActivity {
                 });
 
                 taskNameDialog.show();
+
+
             }
+
+
 
 
         });

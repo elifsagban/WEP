@@ -15,6 +15,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.TaskViewHolder> {
@@ -107,7 +109,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
         TextView title;
         RecyclerView childRecyclerView;
-        private Button addTaskButton;
+        private FloatingActionButton addTaskButton;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
