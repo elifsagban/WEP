@@ -27,23 +27,49 @@
                 android:gravity="center"
                 android:text="TextView"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/addItemBtn"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/addItemBtn"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:backgroundTint="#2979FF"
-                android:clickable="true"
-                android:pointerIcon="none"
-                app:backgroundTint="#2979FF"
-                app:borderWidth="0dp"
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:id="@+id/addItemBtn"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:backgroundTint="#2979FF"-->
+<!--                android:clickable="true"-->
+<!--                android:pointerIcon="none"-->
+<!--                app:backgroundTint="#2979FF"-->
+<!--                app:borderWidth="0dp"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:maxImageSize="20dp"-->
+<!--                app:srcCompat="@android:drawable/ic_menu_add" />-->
+
+            <LinearLayout
+                android:id="@+id/buttonGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintTop_toBottomOf="@id/taskTitle"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:maxImageSize="20dp"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                app:layout_constraintBottom_toTopOf="@id/Child_RV"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addItemBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="add" />
+
+                <Button
+                    android:id="@+id/deleteList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="remove" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/Child_RV"
@@ -54,7 +80,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.01"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/taskTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/buttonGroup" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

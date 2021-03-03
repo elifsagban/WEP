@@ -21,18 +21,15 @@ import java.util.ArrayList;
 
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.TaskViewHolder> {
 
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
     private ArrayList<TaskChild> subItemList = new ArrayList<>();
-    ChildRecyclerViewAdapter adapter;
 
+    private ChildRecyclerViewAdapter adapter;
 
     public TaskRecyclerViewAdapter(ArrayList<Task> tasks) {
 
         this.tasks = tasks;
         adapter = new ChildRecyclerViewAdapter(subItemList);
-
-
-
     }
 
     @NonNull
@@ -75,7 +72,7 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
                         String taskNameUser = taskName.getText().toString();
                         Toast.makeText(holder.itemView.getRootView().getContext(), taskNameUser + " is added", Toast.LENGTH_LONG).show();
                         task.addTaskChild(taskNameUser);
-                        adapter.addExercise(new TaskChild (taskNameUser));
+                        adapter.addTaskItem(new TaskChild(taskNameUser));
                         notifyDataSetChanged();
 
 
@@ -91,6 +88,34 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
                 taskNameDialog.show();
             }
+        });
+
+
+        // delete
+        holder.removeListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder checkTaskDialog = new AlertDialog.Builder(holder.itemView.getRootView().getContext());
+                checkTaskDialog.setTitle("Delete Item");
+                checkTaskDialog.setCancelable(false);
+                checkTaskDialog.setMessage("Do you want to delete it?");
+                checkTaskDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        removeList(position);
+
+                    }
+                });
+
+                checkTaskDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                checkTaskDialog.show();
+            }
 
 
         });
@@ -104,20 +129,31 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     }
 
 
-    public  class TaskViewHolder extends RecyclerView.ViewHolder {
+    public class TaskViewHolder extends RecyclerView.ViewHolder {
 
 
-        TextView title;
-        RecyclerView childRecyclerView;
-        private FloatingActionButton addTaskButton;
+        private TextView title;
+        private RecyclerView childRecyclerView;
+        private Button addTaskButton;
+        private Button removeListButton;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.taskTitle);
             childRecyclerView = itemView.findViewById(R.id.Child_RV);
             addTaskButton = itemView.findViewById(R.id.addItemBtn);
+            removeListButton = itemView.findViewById(R.id.deleteList);
 
         }
 
     }
+
+
+    public void removeList(int position) {
+        tasks.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, tasks.size());
+    }
+
+
 }
