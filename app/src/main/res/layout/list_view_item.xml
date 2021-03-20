@@ -28,11 +28,10 @@
                 android:id="@+id/taskItem"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="#00E5FF"
-                android:paddingTop="5dp"
+                android:layout_margin="9dp"
+                android:longClickable="true"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:longClickable="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/editButton"
                 app:layout_constraintStart_toEndOf="@id/checkTask"
@@ -40,7 +39,7 @@
 
             <Button
                 android:id="@+id/editButton"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="edit"
                 app:layout_constraintBottom_toBottomOf="parent"
