@@ -2,11 +2,15 @@ package com.elif.wep;
 
 import android.content.DialogInterface;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,21 +62,51 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         holder.addTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Create LinearLayout Dynamically
+                LinearLayout layout = new LinearLayout(view.getContext());
+
+                //Setup Layout Attributes
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layout.setLayoutParams(params);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                // task name
+
+                final EditText taskName = new EditText(holder.itemView.getRootView().getContext());
+                taskName.setInputType(InputType.TYPE_CLASS_TEXT);
+
+
+                // priority select
+                Spinner spinner = new Spinner(view.getContext());
+                String[] priority_list = new String[]{"Low", "Medium", "High"};
+                ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(holder.itemView.getRootView().getContext(), android.R.layout.simple_selectable_list_item, priority_list);
+                spinner.setAdapter(spinnerAdapter);
+                spinner.setGravity(Gravity.CENTER);
+
+
+                layout.addView(taskName);
+                layout.addView(spinner);
+
+
                 AlertDialog.Builder taskNameDialog = new AlertDialog.Builder(holder.itemView.getRootView().getContext());
                 taskNameDialog.setTitle("Enter Item Name");
 
-                final EditText taskName = new EditText(holder.itemView.getRootView().getContext());
 
-                taskName.setInputType(InputType.TYPE_CLASS_TEXT);
-                taskNameDialog.setView(taskName);
+                taskNameDialog.setView(layout);
 
                 taskNameDialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String taskNameUser = taskName.getText().toString();
-                        Toast.makeText(holder.itemView.getRootView().getContext(), taskNameUser + " is added", Toast.LENGTH_LONG).show();
-                        task.addTaskChild(taskNameUser);
-                        adapter.addTaskItem(new TaskChild(taskNameUser));
+                        String priority = spinner.getSelectedItem().toString();
+                        TaskChild taskChild = new TaskChild(taskNameUser, priority);
+
+                        task.addTaskChild(taskNameUser, priority);
+                        adapter.addTaskItem(taskChild);
+
+                        Toast.makeText(holder.itemView.getRootView().getContext(), taskChild.getTaskItem(), Toast.LENGTH_LONG).show();
+
                         notifyDataSetChanged();
 
 
@@ -134,8 +168,8 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
         private TextView title;
         private RecyclerView childRecyclerView;
-        private Button addTaskButton;
-        private Button removeListButton;
+        private FloatingActionButton addTaskButton;
+        private FloatingActionButton removeListButton;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
