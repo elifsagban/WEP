@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".TaskList">
 
+    <EditText
+        android:id="@+id/taskListTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:singleLine="false"
+        android:text="Tasks"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTask"
         android:layout_width="0dp"
@@ -13,7 +25,7 @@
         app:layout_constraintBottom_toTopOf="@id/addTaskList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/taskListTitle" />
 
     <Button
         android:id="@+id/addTaskList"
@@ -21,16 +33,20 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Add"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/mainGoal"
+        app:layout_constraintTop_toBottomOf="@id/recycleViewTask"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <Button
-            android:id="@+id/mainGoal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/addTaskList"
-            android:layout_gravity="center"
-            android:text="Goal" />
+    <Button
+        android:id="@+id/mainGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Goal"
+        app:layout_constraintTop_toBottomOf="@id/addTaskList"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintVertical_bias="0.833"
+        tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

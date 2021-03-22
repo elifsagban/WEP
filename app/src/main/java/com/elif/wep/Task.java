@@ -1,6 +1,8 @@
 package com.elif.wep;
 import java.util.ArrayList;
 
+
+
 public class Task {
 
     private String title;
@@ -31,8 +33,8 @@ public class Task {
         return subItemController.getListOfItems();
     }
 
-    public void addTaskChild(String taskName) {
-        subItemController.addSubItem(taskName);
+    public void addTaskChild(String taskName, String priority) {
+        subItemController.addSubItem(taskName, priority);
     }
 
 }
