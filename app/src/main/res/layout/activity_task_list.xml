@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".TaskList">
 
-    <EditText
+
+    <TextView
         android:id="@+id/taskListTitle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:singleLine="false"
         android:text="Tasks"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,31 +22,42 @@
         android:id="@+id/recycleViewTask"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/addTaskList"
+        app:layout_constraintBottom_toTopOf="@id/buttonAddGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskListTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/taskListTitle" >
 
-    <Button
-        android:id="@+id/addTaskList"
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:id="@+id/buttonAddGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Add"
-        app:layout_constraintBottom_toTopOf="@+id/mainGoal"
-        app:layout_constraintTop_toBottomOf="@id/recycleViewTask"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/mainGoal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Goal"
-        app:layout_constraintTop_toBottomOf="@id/addTaskList"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/linearLayout"
-        app:layout_constraintVertical_bias="0.833"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/addTaskList"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/note_icon_foreground" />
+
+        <ImageButton
+            android:id="@+id/mainGoal"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/glue_icon_foreground"
+            android:text="Goal" />
+    </LinearLayout>
+
+
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout"

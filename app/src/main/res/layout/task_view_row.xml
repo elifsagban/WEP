@@ -13,121 +13,75 @@
         app:cardBackgroundColor="#F9F9F9">
 
 
-
-     <!--   <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp">
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/taskTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="sans-serif-black"
-                android:gravity="center"
-                android:text="TextView"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-
-            <LinearLayout
-                android:id="@+id/buttonGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                app:layout_constraintTop_toBottomOf="@id/taskTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/Child_RV"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/addItemBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="add" />
-
-                <Button
-                    android:id="@+id/deleteList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="remove" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Child_RV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.01"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonGroup" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/linearGroup"
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:rotation="-58"
+                app:layout_constraintStart_toStartOf="@id/linearGroup"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal">
+                app:srcCompat="@mipmap/pin_icon_foreground" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/linearGroup"
+                app:layout_constraintStart_toStartOf="@id/linearGroup"
+                app:layout_constraintTop_toTopOf="@id/linearGroup">
 
                 <TextView
                     android:id="@+id/taskTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:ems="10"
-                    android:text="Task List Name"
+                    android:text="title comes here"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/addItemBtn"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:fabCustomSize="40dp"
-                    android:layout_margin="5dp"
-                    android:clickable="true"
-                    app:backgroundTint="#651FFF"
-                    app:srcCompat="@android:drawable/ic_input_add" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/deleteList"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:fabCustomSize="40dp"
-                    android:layout_margin="5dp"
-                    app:backgroundTint="#651FFF"
-                    app:srcCompat="@android:drawable/ic_menu_delete" />
+                <ImageButton
+                    android:id="@+id/editTask"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/edit_icon_foreground"
 
+                    />
+
+                <ImageButton
+                    android:id="@+id/deleteTask"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@mipmap/delete_icon_foreground" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/Child_RV"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintTop_toBottomOf="@id/linearGroup"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                app:layout_constraintBottom_toBottomOf="@id/linearGroup"
+                app:layout_constraintEnd_toEndOf="@id/linearGroup"
+                app:layout_constraintStart_toStartOf="@id/linearGroup"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     </androidx.cardview.widget.CardView>

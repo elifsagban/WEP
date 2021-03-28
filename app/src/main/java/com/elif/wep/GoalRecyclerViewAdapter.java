@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class GoalRecylerViewAdapter extends RecyclerView.Adapter<GoalRecylerViewAdapter.GoalViewHolder>{
+public class GoalRecyclerViewAdapter extends RecyclerView.Adapter<GoalRecyclerViewAdapter.GoalViewHolder>{
 
     ArrayList<Goal> goals;
 
 
-    public GoalRecylerViewAdapter(ArrayList<Goal> goals) {
+    public GoalRecyclerViewAdapter(ArrayList<Goal> goals) {
 
         this.goals = goals;
 
@@ -34,7 +34,8 @@ public class GoalRecylerViewAdapter extends RecyclerView.Adapter<GoalRecylerView
     public void onBindViewHolder(@NonNull GoalViewHolder holder, int position) {
 
         Goal goal = goals.get(position);
-        holder.goal.setText(goal.getGoalName());    }
+        holder.goal.setText(goal.getGoalName());
+    }
 
     @Override
     public int getItemCount() {

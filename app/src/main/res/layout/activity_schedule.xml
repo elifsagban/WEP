@@ -6,52 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".Schedule">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/calendarLayout"
-        android:layout_width="417dp"
-        android:layout_height="145dp"
+
+    <LinearLayout
+        android:layout_width="404dp"
+        android:layout_height="676dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/prevButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/dayAndYearText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="prev"
-            tools:layout_editor_absoluteX="2dp" />
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/dayAndYearText"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="next"
-            tools:layout_editor_absoluteX="2dp" />
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/dayAndYearText"
-            android:layout_width="wrap_content"
+            android:id="@+id/dateDay"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/nextButton"
-            app:layout_constraintStart_toStartOf="@id/prevButton"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="2dp" />
+            android:ems="10"
+            android:layout_margin="10dp"
+            android:text="Date" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daysRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dayAndYearText"
-            tools:layout_editor_absoluteX="2dp" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/doneTaskList"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
