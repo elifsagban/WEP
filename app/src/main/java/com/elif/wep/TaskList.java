@@ -1,192 +1,182 @@
 package com.elif.wep;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.InputType;
-import android.view.LayoutInflater;
-import android.view.View;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 public class TaskList extends AppCompatActivity {
-    private ImageButton statPage;
-    private ImageButton planPage;
-    private ImageButton homePage;
-    private ImageButton taskPage;
-    private ImageButton profilePage;
 
-    private Button createTask;
-    private RecyclerView recyclerView;
-    private SubItemController subItemController;
-    private Button goalPage;
 
-    private String titleTask;
+    FirebaseAuth fAuth;
+    DatabaseReference db;
+    String userID;
 
-    private final ArrayList<Task> tasks = new ArrayList<>();
+    taskAdapter taskAdapter;
 
-    private LinearLayoutManager linearLayoutManager;
-    TaskRecyclerViewAdapter taskRecyclerViewAdapter;
+    private ImageButton createTask;
+    private ImageButton goalPage;
+
+    private RecyclerView recyclerViewTask;
+
+    private String taskName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
         createTask = findViewById(R.id.addTaskList);
-
-        recyclerView = findViewById(R.id.recycleViewTask);
-        recyclerView.setHasFixedSize(true);
-
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-         taskRecyclerViewAdapter = new TaskRecyclerViewAdapter(tasks);
-        recyclerView.setAdapter(taskRecyclerViewAdapter);
+        recyclerViewTask = findViewById(R.id.recycleViewTask);
 
         goalPage =  findViewById(R.id.mainGoal);
         goalPage.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-            openGoalPage();
+                openGoalPage();
             }
         });
+
+        fAuth = FirebaseAuth.getInstance();
+        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+
+
+        // To display the Recycler view linearly
+        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
+
+        // It is a class provide by the FirebaseUI to make a
+        // query in the database to fetch appropriate data
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                .setQuery(db, TaskItem.class)
+                .build();
+        // Connecting object of required Adapter class to
+        // the Adapter class itself
+        taskAdapter = new taskAdapter(options);
+        // Connecting Adapter class with the Recycler view*/
+        recyclerViewTask.setAdapter(taskAdapter);
+
 
 
         createTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder taskNameDialog = new AlertDialog.Builder(TaskList.this);
-
-                taskNameDialog.setTitle("Enter Task Name");
-
-                final EditText taskName = new EditText(TaskList.this);
-
-                taskName.setInputType(InputType.TYPE_CLASS_TEXT);
-                taskNameDialog.setView(taskName);
-
-                taskNameDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        titleTask = taskName.getText().toString();
-                            Toast.makeText(TaskList.this, titleTask + " is created", Toast.LENGTH_LONG).show();
-                            subItemController = new SubItemController();
-                            Task task = new Task(titleTask, subItemController.getListOfItems());
-                            tasks.add(task);
-
-
-
-                    }
-                });
-
-                taskNameDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-
-                taskNameDialog.show();
-
-
+                addTask();
             }
-
-
-
-
         });
+    }
 
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override protected void onStart()
+    {
+        super.onStart();
+        taskAdapter.startListening();
+    }
 
-            statPage = (ImageButton) findViewById(R.id.statPage);
-            statPage.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    openStatsPage();
-
-                }
-            });
-            planPage = (ImageButton) findViewById(R.id.planPage);
-            planPage.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    openPlanPage();
-
-                }
-            });
-            homePage = (ImageButton) findViewById(R.id.homePage);
-            homePage.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    openHomePage();
-
-                }
-            });
-            taskPage = (ImageButton) findViewById(R.id.taskPage);
-            taskPage.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    openTaskPage();
-
-                }
-            });
-            profilePage = (ImageButton) findViewById(R.id.profilePage);
-            profilePage.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-
-                    openProfilePage();
-
-                }
-            });
-        }
-        public void openStatsPage() {
-            Intent intent = new Intent(this, Statistics.class);
-            startActivity(intent);
-        }
-        private void openPlanPage() {
-            Intent intent = new Intent(this, Schedule.class);
-            startActivity(intent);
-        }
-        private void openHomePage() {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
-        private void openTaskPage() {
-            Intent intent = new Intent(this, TaskList.class);
-            startActivity(intent);
-        }
-        private void openProfilePage() {
-            Intent intent = new Intent(this, Profile.class);
-            startActivity(intent);
-        }
     private void openGoalPage() {
         Intent intent = new Intent(this, GoalList.class);
         startActivity(intent);
     }
 
+    private void addTask() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(TaskList.this);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+
+        View view = layoutInflater.inflate(R.layout.input_alertdialog, null);
+        alertDialog.setView(view);
+
+        AlertDialog addDialog = alertDialog.create();
+        addDialog.setCancelable(false);
+
+        final EditText task = view.findViewById(R.id.dialogUserTitle);
+        final EditText description = view.findViewById(R.id.dialogUserDesc);
+
+        Button save = view.findViewById(R.id.add_button);
+        Button cancel = view.findViewById(R.id.cancel_button);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addDialog.dismiss();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String mTask = task.getText().toString().trim();
+                String mDescription = description.getText().toString().trim();
+                String id = db.push().getKey();
+                String date = DateFormat.getDateInstance().format(new Date());
+
+
+                if(TextUtils.isEmpty(mTask)) {
+                    task.setError("Task required");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(mDescription)) {
+                    description.setError("Description required");
+                    return;
+                } else {
+
+                    TaskItem taskItem = new TaskItem(mTask, mDescription, id, date);
+
+                    db.child(id).setValue(taskItem).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()) {
+                                Toast.makeText(TaskList.this, "successfully added", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String error = task.getException().toString();
+                                Toast.makeText(TaskList.this, "error message: " + error, Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        }
+                    });
+
+                }
+
+                addDialog.dismiss();;
+            }
+
+        });
+
+        addDialog.show();
+
+
 
     }
 
 
-
-
-
-
+}
