@@ -149,7 +149,7 @@ public class TaskList extends AppCompatActivity {
                     return;
                 } else {
 
-                    TaskItem taskItem = new TaskItem(mTask, mDescription, id, date);
+                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id, 0);
 
                     db.child(id).setValue(taskItem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

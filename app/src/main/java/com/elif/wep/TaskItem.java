@@ -1,5 +1,5 @@
 package com.elif.wep;
-import java.util.ArrayList;
+
 
 
 public class TaskItem {
@@ -8,17 +8,20 @@ public class TaskItem {
     private String description;
     private String date;
     private String id;
+    private int duration;
+    private int seconds = 0;
 
 
     public TaskItem() {
 
     }
 
-    public TaskItem(String title, String description, String date, String id) {
+    public TaskItem(String title, String description, String date, String id, int duration) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.id = id;
+        this.duration = duration;
 
 
     }
