@@ -8,16 +8,18 @@ public class TaskItem {
     private String description;
     private String date;
     private String id;
+    private Chronometer chronometer;
 
 
     public TaskItem() {
 
     }
 
-    public TaskItem(String title, String description, String date, String id) {
+    public TaskItem(String title, String description, String date, Chronometer chronometer, String id) {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.chronometer = chronometer;
         this.id = id;
 
 
