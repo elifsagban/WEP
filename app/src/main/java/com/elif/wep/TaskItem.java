@@ -1,37 +1,27 @@
 package com.elif.wep;
+import java.io.Serializable;
 
-
-
-public class TaskItem {
+public class TaskItem implements Serializable {
 
     private String title;
     private String description;
     private String date;
+
     private String id;
-<<<<<<< HEAD
     private int duration;
     private int seconds = 0;
-=======
     private Chronometer chronometer;
->>>>>>> 2a393171e567686a1a5f01b38fa66da5967ac23e
 
 
     public TaskItem() {
 
     }
 
-<<<<<<< HEAD
-    public TaskItem(String title, String description, String date, String id, int duration) {
-=======
-    public TaskItem(String title, String description, String date, Chronometer chronometer, String id) {
->>>>>>> 2a393171e567686a1a5f01b38fa66da5967ac23e
+    public TaskItem(String title, String description, String date,String id) {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.chronometer = chronometer;
         this.id = id;
-        this.duration = duration;
-
 
     }
 
@@ -57,6 +47,22 @@ public class TaskItem {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public Chronometer getChronometer() {
+        return chronometer;
     }
 
 }
