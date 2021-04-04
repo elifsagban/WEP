@@ -1,17 +1,13 @@
 package com.elif.wep;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -46,7 +41,6 @@ public class TaskList extends AppCompatActivity {
 
     private RecyclerView recyclerViewTask;
 
-    private String taskName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,13 +88,6 @@ public class TaskList extends AppCompatActivity {
         });
     }
 
-    // Function to tell the app to start getting
-    // data from database on starting of the activity
-    @Override protected void onStart()
-    {
-        super.onStart();
-        taskAdapter.startListening();
-    }
 
     private void openGoalPage() {
         Intent intent = new Intent(this, GoalList.class);
@@ -149,7 +136,7 @@ public class TaskList extends AppCompatActivity {
                     return;
                 } else {
 
-                    TaskItem taskItem = new TaskItem(mTask, mDescription, id, date);
+                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id);
 
                     db.child(id).setValue(taskItem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -176,6 +163,14 @@ public class TaskList extends AppCompatActivity {
 
 
 
+    }
+
+    // Function to tell the app to start getting
+    // data from database on starting of the activity
+    @Override protected void onStart()
+    {
+        super.onStart();
+        taskAdapter.startListening();
     }
 
 

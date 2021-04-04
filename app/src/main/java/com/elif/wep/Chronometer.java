@@ -1,28 +1,18 @@
 package com.elif.wep;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.widget.TextView;
 
 
 import java.util.Locale;
 
 class Chronometer {
-    private ImageButton statPage;
-    private ImageButton planPage;
-    private ImageButton homePage;
-    private ImageButton taskPage;
-    private ImageButton profilePage;
 
-    private Button registerBtn;
     private int seconds = 0;
 
-    // Is the stopwatch running?
     private boolean running;
-
     private boolean wasRunning;
 
 
@@ -80,15 +70,13 @@ class Chronometer {
     // The runTimer() method uses a Handler
     // to increment the seconds and
     // update the text view.
-    private void runTimer() {
+    private void runTimer(TextView timeView) {
 
         // Get the text view.
-        final TextView timeView
-                = (TextView) homePage.findViewById(R.id.time_view);
+       // final TextView timeView = (TextView) findViewById(R.id.time_view);
 
         // Creates a new Handler
-        final Handler handler
-                = new Handler();
+        final Handler handler = new Handler();
 
         // Call the post() method,
         // passing in a new Runnable.
@@ -106,11 +94,7 @@ class Chronometer {
 
                 // Format the seconds into hours, minutes,
                 // and seconds.
-                String time
-                        = String
-                        .format(Locale.getDefault(),
-                                "%d:%02d:%02d", hours,
-                                minutes, secs);
+                String time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, secs);
 
                 // Set the text view text.
                 timeView.setText(time);

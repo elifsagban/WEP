@@ -1,11 +1,15 @@
 package com.elif.wep;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -19,30 +23,31 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton profilePage;
 
     private Button registerBtn;
+
     private int seconds = 0;
 
     // Is the stopwatch running?
     private boolean running;
-
     private boolean wasRunning;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(getIntent().getExtras() != null) {
+            TaskItem taskItem = (TaskItem) getIntent().getSerializableExtra("task");
+
+        }
+
         if (savedInstanceState != null) {
 
             // Get the previous state of the stopwatch
             // if the activity has been
             // destroyed and recreated.
-            seconds
-                    = savedInstanceState
-                    .getInt("seconds");
-            running
-                    = savedInstanceState
-                    .getBoolean("running");
-            wasRunning
-                    = savedInstanceState
-                    .getBoolean("wasRunning");
+            seconds = savedInstanceState.getInt("seconds");
+            running = savedInstanceState.getBoolean("running");
+            wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
         runTimer();
     }
@@ -50,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
     // Save the state of the stopwatch
     // if it's about to be destroyed.
     @Override
-    public void onSaveInstanceState(
-            Bundle savedInstanceState) {
+    public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState
                 .putInt("seconds", seconds);
@@ -119,13 +123,10 @@ public class MainActivity extends AppCompatActivity {
     {
 
         // Get the text view.
-        final TextView timeView
-                = (TextView)findViewById(
-                R.id.time_view);
+        final TextView timeView = (TextView)findViewById(R.id.time_view);
 
         // Creates a new Handler
-        final Handler handler
-                = new Handler();
+        final Handler handler = new Handler();
 
         // Call the post() method,
         // passing in a new Runnable.
@@ -144,11 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Format the seconds into hours, minutes,
                 // and seconds.
-                String time
-                        = String
-                        .format(Locale.getDefault(),
-                                "%d:%02d:%02d", hours,
-                                minutes, secs);
+                String time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, secs);
 
                 // Set the text view text.
                 timeView.setText(time);
@@ -164,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(this, 1000);
             }
         });
+
+
         registerBtn = (Button) findViewById(R.id.mainRegister);
         registerBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -245,9 +244,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
-
     private void openRegisterPage() {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
+
+
+
 }

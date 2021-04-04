@@ -1,13 +1,15 @@
 package com.elif.wep;
-import java.util.ArrayList;
+import java.io.Serializable;
 
-
-public class TaskItem {
+public class TaskItem implements Serializable {
 
     private String title;
     private String description;
     private String date;
+
     private String id;
+    private int duration;
+    private int seconds = 0;
     private Chronometer chronometer;
 
 
@@ -15,13 +17,11 @@ public class TaskItem {
 
     }
 
-    public TaskItem(String title, String description, String date, Chronometer chronometer, String id) {
+    public TaskItem(String title, String description, String date,String id) {
         this.title = title;
         this.description = description;
         this.date = date;
-        this.chronometer = chronometer;
         this.id = id;
-
 
     }
 
@@ -47,6 +47,22 @@ public class TaskItem {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public Chronometer getChronometer() {
+        return chronometer;
     }
 
 }
