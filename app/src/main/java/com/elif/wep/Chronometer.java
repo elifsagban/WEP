@@ -97,10 +97,24 @@ class Chronometer {
     // the Reset button is clicked.
     // Below method gets called
     // when the Reset button is clicked.
-    public void onClickReset()
+    public void onClickSave()
     {
+       // running = false;
+      //  seconds = 0;
+
+        long retryDate = System.currentTimeMillis();
+
+        int sec = seconds;
+
+        Timestamp original = new Timestamp(retryDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(original.getTime());
+        cal.add(Calendar.SECOND, sec);
+        Timestamp later = new Timestamp(cal.getTime().getTime());
+
+        System.out.println(original);
+        System.out.println(later);
         running = false;
-        seconds = 0;
     }
 
     // Sets the NUmber of seconds on the timer.
