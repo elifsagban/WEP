@@ -110,7 +110,6 @@ public class TaskTimer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 chronometer.onClickStop();
-                savetoFirebase(chronometer);
 
             }
         });
@@ -120,7 +119,9 @@ public class TaskTimer extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                chronometer.onClickReset();
+                chronometer.onClickSave();
+                savetoFirebase(chronometer);
+
             }
         });
     }
@@ -129,7 +130,6 @@ public class TaskTimer extends AppCompatActivity {
 
 
         db.child(taskItem.getId()).child("seconds").setValue(chronometer.getSeconds());
-        db.child(taskItem.getId()).child("title").setValue("they saaaay");
 
     }
 
