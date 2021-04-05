@@ -42,7 +42,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:text="@string/start"
-        app:layout_constraintBottom_toTopOf="@id/stop_button"
+        app:layout_constraintBottom_toTopOf="@id/pause_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,23 +50,23 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/stop_button"
+        android:id="@+id/pause_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/stop"
-        app:layout_constraintBottom_toTopOf="@id/reset_button"
+        android:text="Pause"
+        app:layout_constraintBottom_toTopOf="@id/save_button"
         app:layout_constraintTop_toBottomOf="@id/start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/reset_button"
+        android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/reset"
-        app:layout_constraintTop_toBottomOf="@id/stop_button"
+        android:text="Save"
+        app:layout_constraintTop_toBottomOf="@id/pause_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
