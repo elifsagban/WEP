@@ -7,10 +7,35 @@ import android.widget.TextView;
 
 
 import java.util.Locale;
-
+import java.util.*;
+import java.sql.*;
 class Chronometer {
 
     private int seconds = 0;
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public boolean isWasRunning() {
+        return wasRunning;
+    }
+
+    public void setWasRunning(boolean wasRunning) {
+        this.wasRunning = wasRunning;
+    }
 
     private boolean running;
     private boolean wasRunning;
@@ -42,7 +67,7 @@ class Chronometer {
     // when the Start button is clicked.
     // Below method gets called
     // when the Start button is clicked.
-    public void onClickStart(View view)
+    public void onClickStart()
     {
         running = true;
     }
@@ -51,8 +76,20 @@ class Chronometer {
     // when the Stop button is clicked.
     // Below method gets called
     // when the Stop button is clicked.
-    public void onClickStop(View view)
+    public void onClickStop()
     {
+        long retryDate = System.currentTimeMillis();
+
+        int sec = seconds;
+
+        Timestamp original = new Timestamp(retryDate);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(original.getTime());
+        cal.add(Calendar.SECOND, sec);
+        Timestamp later = new Timestamp(cal.getTime().getTime());
+
+        System.out.println(original);
+        System.out.println(later);
         running = false;
     }
 
@@ -60,7 +97,7 @@ class Chronometer {
     // the Reset button is clicked.
     // Below method gets called
     // when the Reset button is clicked.
-    public void onClickReset(View view)
+    public void onClickReset()
     {
         running = false;
         seconds = 0;
@@ -70,7 +107,7 @@ class Chronometer {
     // The runTimer() method uses a Handler
     // to increment the seconds and
     // update the text view.
-    private void runTimer(TextView timeView) {
+    protected void runTimer(TextView timeView) {
 
         // Get the text view.
        // final TextView timeView = (TextView) findViewById(R.id.time_view);
