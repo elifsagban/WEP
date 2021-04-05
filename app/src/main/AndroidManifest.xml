@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WEP">
-        <activity android:name=".Schedule"></activity>
+        <activity android:name=".TaskTimer"></activity>
+        <activity android:name=".Schedule" />
         <activity android:name=".Statistics" />
         <activity android:name=".GoalList" />
         <activity android:name=".TaskList" />
