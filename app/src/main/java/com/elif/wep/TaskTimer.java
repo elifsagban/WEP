@@ -34,10 +34,7 @@ public class TaskTimer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_timer);
-        if(getIntent().getExtras() != null) {
-            TaskItem taskItem = (TaskItem) getIntent().getSerializableExtra("task");
 
-        }
 
         Chronometer chronometer = new Chronometer();
         TextView time_view = findViewById(R.id.time_view);
