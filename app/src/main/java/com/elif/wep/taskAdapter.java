@@ -36,7 +36,7 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
             public void onClick(View view) {
 
                 Toast.makeText(holder.itemView.getContext(),  model.getTitle(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(holder.itemView.getContext(), MainActivity.class);
+                Intent intent = new Intent(holder.itemView.getContext(), TaskTimer.class);
                 intent.putExtra("task", model);
                 holder.itemView.getContext().startActivity(intent);
 
