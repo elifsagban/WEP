@@ -23,13 +23,15 @@ public class TaskTimer extends AppCompatActivity {
     private boolean wasRunning;
     private Button startButton;
     private Button pauseButton;
-    private Button resetButton;
+    private Button saveButton;
+
     private TaskItem taskItem;
 
 
     FirebaseAuth fAuth;
     DatabaseReference db;
     String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +48,8 @@ public class TaskTimer extends AppCompatActivity {
         wasRunning = chronometer.isWasRunning();
 
         startButton = findViewById(R.id.start_button);
-        pauseButton = findViewById(R.id.stop_button);
-        resetButton = findViewById(R.id.reset_button);
+        pauseButton = findViewById(R.id.pause_button);
+        saveButton = findViewById(R.id.save_button);
 
 
 
@@ -89,8 +91,8 @@ public class TaskTimer extends AppCompatActivity {
         }
         chronometer.runTimer(time_view);
         startChronometer(chronometer);
-        stopChronometer(chronometer);
-        resetChronometer(chronometer);
+        pauseChronometer(chronometer);
+        saveChronometer(chronometer);
     }
 
 
@@ -105,18 +107,19 @@ public class TaskTimer extends AppCompatActivity {
         });
     }
 
-    private void stopChronometer(Chronometer chronometer) {
+    private void pauseChronometer(Chronometer chronometer) {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chronometer.onClickStop();
 
+
             }
         });
     }
 
-    private void resetChronometer(Chronometer chronometer) {
-        resetButton.setOnClickListener(new View.OnClickListener() {
+    private void saveChronometer(Chronometer chronometer) {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 chronometer.onClickSave();
@@ -129,8 +132,11 @@ public class TaskTimer extends AppCompatActivity {
     private void savetoFirebase(Chronometer chronometer) {
 
 
-        db.child(taskItem.getId()).child("seconds").setValue(chronometer.getSeconds());
+        int custom_seconds = chronometer.getSeconds();
+
+        db.child(taskItem.getId()).child("seconds").setValue(custom_seconds);
 
     }
+
 
 }

@@ -9,9 +9,32 @@ import android.widget.TextView;
 import java.util.Locale;
 import java.util.*;
 import java.sql.*;
+import java.util.concurrent.TimeUnit;
+
 class Chronometer {
 
     private int seconds = 0;
+    private Timestamp start_time;
+
+    public Timestamp getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Timestamp start_time) {
+        this.start_time = start_time;
+    }
+
+    public Timestamp getBreak_time() {
+        return break_time;
+    }
+
+    public void setBreak_time(Timestamp break_time) {
+        this.break_time = break_time;
+    }
+
+    private Timestamp break_time;
+    private boolean running;
+    private boolean wasRunning;
 
     public int getSeconds() {
         return seconds;
@@ -36,9 +59,6 @@ class Chronometer {
     public void setWasRunning(boolean wasRunning) {
         this.wasRunning = wasRunning;
     }
-
-    private boolean running;
-    private boolean wasRunning;
 
 
     // If the activity is paused,
@@ -70,6 +90,12 @@ class Chronometer {
     public void onClickStart()
     {
         running = true;
+
+        if(seconds>0) {
+            Timestamp start = new Timestamp(System.currentTimeMillis());
+            setStart_time(start);
+            System.out.println("start " + start);
+        }
     }
 
     // Stop the stopwatch running
@@ -78,19 +104,22 @@ class Chronometer {
     // when the Stop button is clicked.
     public void onClickStop()
     {
-        long retryDate = System.currentTimeMillis();
 
-        int sec = seconds;
+        Timestamp b_timestamp = new Timestamp(System.currentTimeMillis());
 
-        Timestamp original = new Timestamp(retryDate);
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(original.getTime());
-        cal.add(Calendar.SECOND, sec);
-        Timestamp later = new Timestamp(cal.getTime().getTime());
+        setBreak_time(b_timestamp);
 
-        System.out.println(original);
-        System.out.println(later);
+        System.out.println("break " + b_timestamp);
+
+
         running = false;
+
+    }
+
+     void calculateBreakTime() {
+
+        long diff = getBreak_time().getTime() - getStart_time().getTime();
+        System.out.println("break time result " + diff / 1000 );
     }
 
     // Reset the stopwatch when
