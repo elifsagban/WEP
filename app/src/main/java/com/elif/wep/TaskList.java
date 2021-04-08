@@ -50,14 +50,14 @@ public class TaskList extends AppCompatActivity {
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
 
-        goalPage =  findViewById(R.id.mainGoal);
-        goalPage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                openGoalPage();
-            }
-        });
+//        goalPage =  findViewById(R.id.mainGoal);
+//        goalPage.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                openGoalPage();
+//            }
+//        });
 
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
@@ -136,7 +136,7 @@ public class TaskList extends AppCompatActivity {
                     return;
                 } else {
 
-                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id);
+                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id, false, null);
 
                     db.child(id).setValue(taskItem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

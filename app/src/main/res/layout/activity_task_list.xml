@@ -3,94 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TaskList">
+    android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/taskListTitle"
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        app:cardBackgroundColor="#FAFFFFFF"
         android:layout_height="wrap_content"
-        android:text="Tasks"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp"
+        app:contentPadding="10dp"
+        android:id="@+id/addTaskLinear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Today's Tasks"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+                <ImageButton
+                    android:id="@+id/addTaskList"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="30dp"
+                    android:background="@mipmap/ic_plus_icon_foreground" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTask"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/buttonAddGroup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/taskListTitle" >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-    <LinearLayout
-        android:id="@+id/buttonAddGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/addTaskList"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/note_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/mainGoal"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/glue_icon_foreground"
-            android:text="Goal" />
-    </LinearLayout>
-
-
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addTaskLinear"
+        tools:itemCount="20" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageButton
             android:id="@+id/statPage"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
             android:background="@mipmap/stat_icon_foreground" />
 
         <ImageButton
             android:id="@+id/planPage"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
             android:background="@mipmap/plan_icon_foreground" />
 
         <ImageButton
             android:id="@+id/homePage"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
             android:background="@mipmap/home_icon_foreground" />
 
         <ImageButton
             android:id="@+id/taskPage"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
             android:background="@mipmap/task_icon_foreground" />
 
         <ImageButton
