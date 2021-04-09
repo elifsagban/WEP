@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -31,6 +32,7 @@ public class TaskTimer extends AppCompatActivity {
     FirebaseAuth fAuth;
     DatabaseReference db;
     String userID;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +56,14 @@ public class TaskTimer extends AppCompatActivity {
 
 
 
+
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
         if (getIntent().getExtras() != null) {
             taskItem = (TaskItem) getIntent().getSerializableExtra("task");
+            assert taskItem != null;
             selectedTask.setText(taskItem.getTitle());
             startTimer(savedInstanceState, chronometer, time_view);
 
@@ -101,8 +105,6 @@ public class TaskTimer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 chronometer.onClickStart();
-                savetoFirebase(chronometer);
-
             }
         });
     }
@@ -123,20 +125,22 @@ public class TaskTimer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 chronometer.onClickSave();
-                savetoFirebase(chronometer);
+                saveSeconds(chronometer);
 
             }
         });
     }
 
-    private void savetoFirebase(Chronometer chronometer) {
-
+    private void saveSeconds(Chronometer chronometer) {
 
         int custom_seconds = chronometer.getSeconds();
+        ArrayList items = chronometer.getItems();
 
-        db.child(taskItem.getId()).child("seconds").setValue(custom_seconds);
+        id = taskItem.getId();
+
+        db.child(id).child("seconds").setValue(custom_seconds);
+        db.child(id).child("breaks").setValue(items);
 
     }
-
 
 }

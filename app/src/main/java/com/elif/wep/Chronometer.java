@@ -15,6 +15,19 @@ class Chronometer {
 
     private int seconds = 0;
     private Timestamp start_time;
+    private Timestamp break_time;
+    private boolean running;
+    private boolean wasRunning;
+
+
+    ArrayList items = new ArrayList();
+
+
+    public ArrayList getItems() {
+        return items;
+    }
+
+
 
     public Timestamp getStart_time() {
         return start_time;
@@ -31,10 +44,6 @@ class Chronometer {
     public void setBreak_time(Timestamp break_time) {
         this.break_time = break_time;
     }
-
-    private Timestamp break_time;
-    private boolean running;
-    private boolean wasRunning;
 
     public int getSeconds() {
         return seconds;
@@ -61,8 +70,6 @@ class Chronometer {
     }
 
 
-    // If the activity is paused,
-    // stop the stopwatch.
 
     protected void onPause()
     {
@@ -71,9 +78,6 @@ class Chronometer {
         running = false;
     }
 
-    // If the activity is resumed,
-    // start the stopwatch
-    // again if it was running previously.
 
     protected void onResume()
     {
@@ -83,43 +87,51 @@ class Chronometer {
         }
     }
 
-    // Start the stopwatch running
-    // when the Start button is clicked.
-    // Below method gets called
-    // when the Start button is clicked.
+
     public void onClickStart()
     {
         running = true;
 
-        if(seconds>0) {
+        if(seconds > 0) {
             Timestamp start = new Timestamp(System.currentTimeMillis());
             setStart_time(start);
-            System.out.println("start " + start);
+            System.out.println("start " + getStart_time());
+
+            long diff = getStart_time().getTime() -  getBreak_time().getTime();
+
+            ArrayList item =  new ArrayList();
+            item.add(getStart_time().getTime());
+            item.add(getBreak_time().getTime());
+            item.add(diff);
+
+            items.add(item);
+            System.out.println("break time result " + diff);
+
         }
+
     }
 
-    // Stop the stopwatch running
-    // when the Stop button is clicked.
-    // Below method gets called
-    // when the Stop button is clicked.
+
     public void onClickStop()
     {
-
-        Timestamp b_timestamp = new Timestamp(System.currentTimeMillis());
-
-        setBreak_time(b_timestamp);
-
-        System.out.println("break " + b_timestamp);
-
-
         running = false;
+
+        if(seconds > 0) {
+            Timestamp b_timestamp = new Timestamp(System.currentTimeMillis());
+            setBreak_time(b_timestamp);
+            System.out.println("break " + b_timestamp);
+        }
 
     }
 
      void calculateBreakTime() {
 
-        long diff = getBreak_time().getTime() - getStart_time().getTime();
-        System.out.println("break time result " + diff / 1000 );
+        if(break_time != null && start_time != null) {
+
+            long diff = getStart_time().getTime() -  getBreak_time().getTime();
+            System.out.println("break time result " + diff);
+
+        }
     }
 
     // Reset the stopwatch when

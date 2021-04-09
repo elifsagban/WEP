@@ -1,27 +1,28 @@
 package com.elif.wep;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TaskItem implements Serializable {
 
     private String title;
     private String description;
     private String date;
-
     private String id;
-    private int duration;
-    private int seconds = 0;
-    private Chronometer chronometer;
+    private boolean isDone;
+    private ArrayList breaks = new ArrayList();
 
 
     public TaskItem() {
 
     }
 
-    public TaskItem(String title, String description, String date,String id) {
+    public TaskItem(String title, String description, String date ,String id, boolean isDone, ArrayList breaks) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.id = id;
+        this.isDone = isDone;
+        this.breaks = breaks;
 
     }
 
@@ -53,16 +54,14 @@ public class TaskItem implements Serializable {
         return id;
     }
 
-    public int getDuration() {
-        return duration;
+    public boolean isDone() {
+        return isDone;
     }
 
-    public int getSeconds() {
-        return seconds;
+    public void setDone(boolean done) {
+        isDone = done;
     }
 
-    public Chronometer getChronometer() {
-        return chronometer;
-    }
+
 
 }
