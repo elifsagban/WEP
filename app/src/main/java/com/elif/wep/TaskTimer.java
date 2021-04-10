@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -115,7 +116,6 @@ public class TaskTimer extends AppCompatActivity {
             public void onClick(View view) {
                 chronometer.onClickStop();
 
-
             }
         });
     }
@@ -126,7 +126,6 @@ public class TaskTimer extends AppCompatActivity {
             public void onClick(View view) {
                 chronometer.onClickSave();
                 saveSeconds(chronometer);
-
             }
         });
     }
@@ -134,12 +133,14 @@ public class TaskTimer extends AppCompatActivity {
     private void saveSeconds(Chronometer chronometer) {
 
         int custom_seconds = chronometer.getSeconds();
-        ArrayList items = chronometer.getItems();
+        ArrayList items_break = chronometer.getItemsBreak();
+        ArrayList avg_duration = chronometer.getItemsDuration();
 
         id = taskItem.getId();
 
         db.child(id).child("seconds").setValue(custom_seconds);
-        db.child(id).child("breaks").setValue(items);
+        db.child(id).child("breaks").setValue(items_break);
+        db.child(id).child("duration").setValue(avg_duration);
 
     }
 
