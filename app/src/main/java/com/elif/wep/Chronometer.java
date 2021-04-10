@@ -14,27 +14,47 @@ import java.util.concurrent.TimeUnit;
 class Chronometer {
 
     private int seconds = 0;
-    private Timestamp start_time;
+    private Timestamp start_time_break;
     private Timestamp break_time;
+    private Timestamp start_time_seconds;
+    private Timestamp duration_time;
     private boolean running;
     private boolean wasRunning;
 
 
-    ArrayList items = new ArrayList();
+    ArrayList<Integer> avg_duration = new ArrayList();
+    ArrayList<Integer> items_duration = new ArrayList();
 
 
-    public ArrayList getItems() {
-        return items;
+    public ArrayList getItemsDuration() {
+        return avg_duration;
     }
 
-
-
-    public Timestamp getStart_time() {
-        return start_time;
+    public Timestamp getStart_time_seconds() {
+        return start_time_seconds;
+    }
+    public void setStart_time_seconds(Timestamp start_time_seconds) {
+        this.start_time_seconds = start_time_seconds;
+    }
+    public Timestamp getDuration_time() {
+        return duration_time;
     }
 
-    public void setStart_time(Timestamp start_time) {
-        this.start_time = start_time;
+    public void setDuration_time(Timestamp duration_time) {
+        this.duration_time = duration_time;
+    }
+    ArrayList<Integer> items_break = new ArrayList();
+
+
+    public ArrayList getItemsBreak() {
+        return items_break;
+    }
+    public Timestamp getStart_time_break() {
+        return start_time_seconds;
+    }
+
+    public void setStart_time_break(Timestamp start_time_break) {
+        this.start_time_break = start_time_break;
     }
 
     public Timestamp getBreak_time() {
@@ -91,21 +111,16 @@ class Chronometer {
     public void onClickStart()
     {
         running = true;
+        Timestamp startSeconds = new Timestamp(System.currentTimeMillis());
+        setStart_time_seconds(startSeconds);
+        System.out.println("start seconds" + getStart_time_seconds());
 
         if(seconds > 0) {
-            Timestamp start = new Timestamp(System.currentTimeMillis());
-            setStart_time(start);
-            System.out.println("start " + getStart_time());
+            Timestamp startBreak = new Timestamp(System.currentTimeMillis());
+            setStart_time_break(startBreak);
+            System.out.println("start breaks" + getStart_time_break());
+            calculateBreakTime();
 
-            long diff = getStart_time().getTime() -  getBreak_time().getTime();
-
-            ArrayList item =  new ArrayList();
-            item.add(getStart_time().getTime());
-            item.add(getBreak_time().getTime());
-            item.add(diff);
-
-            items.add(item);
-            System.out.println("break time result " + diff);
 
         }
 
@@ -115,7 +130,11 @@ class Chronometer {
     public void onClickStop()
     {
         running = false;
+        Timestamp duration_ts = new Timestamp(System.currentTimeMillis());
+        setDuration_time(duration_ts);
+        System.out.println("duration timestamp " + duration_ts);
 
+        calculateDuration();
         if(seconds > 0) {
             Timestamp b_timestamp = new Timestamp(System.currentTimeMillis());
             setBreak_time(b_timestamp);
@@ -125,15 +144,36 @@ class Chronometer {
     }
 
      void calculateBreakTime() {
-
-        if(break_time != null && start_time != null) {
-
-            long diff = getStart_time().getTime() -  getBreak_time().getTime();
-            System.out.println("break time result " + diff);
+         if(duration_time != null && start_time_seconds != null) {
+             int diff = (int) (getStart_time_break().getTime() - getBreak_time().getTime());
+             items_break.add(diff);
+             System.out.println("break time result " + diff);
 
         }
     }
+    public void calculateDuration(){
+        if(duration_time != null && start_time_seconds != null) {
+            int duration = (int) (getDuration_time().getTime() - getStart_time_seconds().getTime());
+            items_duration.add(duration);
+            System.out.println("duration time result " + duration);
 
+
+        }
+
+    }
+    public void calculateAvgDuration(){
+        int total = 0;
+        int avg = 0;
+        for(int i = 0; i < items_duration.size(); i++)
+        {
+            total = total + (int) items_duration.get(i);
+            avg = total / items_duration.size();
+
+        }
+        System.out.println("The Average IS:" + avg);
+        avg_duration.add(avg);
+
+    }
     // Reset the stopwatch when
     // the Reset button is clicked.
     // Below method gets called
@@ -142,9 +182,11 @@ class Chronometer {
     {
        // running = false;
       //  seconds = 0;
-
+        System.out.println(items_duration);
+        calculateAvgDuration();
+        System.out.println(avg_duration);
+        System.out.println(break_time);
         long retryDate = System.currentTimeMillis();
-
         int sec = seconds;
 
         Timestamp original = new Timestamp(retryDate);
