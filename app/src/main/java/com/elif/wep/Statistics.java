@@ -1,5 +1,6 @@
 package com.elif.wep;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Statistics extends AppCompatActivity {
     private ImageButton statPage;
@@ -14,6 +23,10 @@ public class Statistics extends AppCompatActivity {
     private ImageButton homePage;
     private ImageButton taskPage;
     private ImageButton profilePage;
+    TaskItem taskItem;
+    TextView statistic1, statistic2, statistic3, statistic4;
+    DatabaseReference reff;
+    String id;
 
 
     @Override
@@ -21,77 +34,34 @@ public class Statistics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        statPage = (ImageButton) findViewById(R.id.statPage);
-        statPage.setOnClickListener(new View.OnClickListener() {
+        statistic1 = (TextView) findViewById(R.id.statistic1);
+        statistic2 = (TextView) findViewById(R.id.statistic2);
+        statistic3 = (TextView) findViewById(R.id.statistic3);
+        statistic4 = (TextView) findViewById(R.id.statistic4);
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        reff = FirebaseDatabase.getInstance().getReference().child("tasks").child("vp8ntKbAP0VNuvAoxvcwGEinnn62").child("MYvI1bmHPaylq7F9sxE");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String title =  snapshot.child("title").getValue(String.class);
+                Integer seconds =  snapshot.child("seconds").getValue(Integer.class);
+                Integer breaks =  snapshot.child("breaks").child("0").getValue(Integer.class);
+                Integer duration =  snapshot.child("duration").child("0").getValue(Integer.class);
+                statistic1.setText(title);
+                statistic2.setText(seconds);
+                statistic3.setText(breaks);
+                statistic4.setText(duration);
+
+            }
 
             @Override
-            public void onClick(View v) {
-
-                openStatsPage();
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-        planPage = (ImageButton) findViewById(R.id.planPage);
-        planPage.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
 
-                openPlanPage();
-
-            }
-        });
-        homePage = (ImageButton) findViewById(R.id.homePage);
-        homePage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                openHomePage();
-
-            }
-        });
-        taskPage = (ImageButton) findViewById(R.id.taskPage);
-        taskPage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                openTaskPage();
-
-            }
-        });
-        profilePage = (ImageButton) findViewById(R.id.profilePage);
-        profilePage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                openProfilePage();
-
-            }
-        });
     }
-    public void openStatsPage() {
-        Intent intent = new Intent(this, Statistics.class);
-        startActivity(intent);
-    }
-    private void openPlanPage() {
-        Intent intent = new Intent(this, Schedule.class);
-        startActivity(intent);
-    }
-    private void openHomePage() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void openTaskPage() {
-        Intent intent = new Intent(this, TaskList.class);
-        startActivity(intent);
-    }
-    private void openProfilePage() {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-
 
 }
