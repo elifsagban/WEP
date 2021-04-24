@@ -1,18 +1,18 @@
 package com.elif.wep;
 
 import android.os.Handler;
-import android.view.View;
-
 import android.widget.TextView;
 
-
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
-import java.util.*;
-import java.sql.*;
-import java.util.concurrent.TimeUnit;
 
 class Chronometer {
 
+    ArrayList<Integer> avg_duration = new ArrayList();
+    ArrayList<Integer> items_duration = new ArrayList();
+    ArrayList<Integer> items_break = new ArrayList();
     private int seconds = 0;
     private Timestamp start_time_break;
     private Timestamp break_time;
@@ -21,11 +21,6 @@ class Chronometer {
     private boolean running;
     private boolean wasRunning;
 
-
-    ArrayList<Integer> avg_duration = new ArrayList();
-    ArrayList<Integer> items_duration = new ArrayList();
-
-
     public ArrayList getItemsDuration() {
         return avg_duration;
     }
@@ -33,9 +28,11 @@ class Chronometer {
     public Timestamp getStart_time_seconds() {
         return start_time_seconds;
     }
+
     public void setStart_time_seconds(Timestamp start_time_seconds) {
         this.start_time_seconds = start_time_seconds;
     }
+
     public Timestamp getDuration_time() {
         return duration_time;
     }
@@ -43,12 +40,11 @@ class Chronometer {
     public void setDuration_time(Timestamp duration_time) {
         this.duration_time = duration_time;
     }
-    ArrayList<Integer> items_break = new ArrayList();
-
 
     public ArrayList getItemsBreak() {
         return items_break;
     }
+
     public Timestamp getStart_time_break() {
         return start_time_seconds;
     }
@@ -90,32 +86,26 @@ class Chronometer {
     }
 
 
-
-    protected void onPause()
-    {
-        onPause();
+    protected void onPause() {
         wasRunning = running;
         running = false;
     }
 
 
-    protected void onResume()
-    {
-        onResume();
+    protected void onResume() {
         if (wasRunning) {
             running = true;
         }
     }
 
 
-    public void onClickStart()
-    {
+    public void onClickStart() {
         running = true;
         Timestamp startSeconds = new Timestamp(System.currentTimeMillis());
         setStart_time_seconds(startSeconds);
         System.out.println("start seconds" + getStart_time_seconds());
 
-        if(seconds > 0) {
+        if (seconds > 0) {
             Timestamp startBreak = new Timestamp(System.currentTimeMillis());
             setStart_time_break(startBreak);
             System.out.println("start breaks" + getStart_time_break());
@@ -127,15 +117,14 @@ class Chronometer {
     }
 
 
-    public void onClickStop()
-    {
+    public void onClickStop() {
         running = false;
         Timestamp duration_ts = new Timestamp(System.currentTimeMillis());
         setDuration_time(duration_ts);
         System.out.println("duration timestamp " + duration_ts);
 
         calculateDuration();
-        if(seconds > 0) {
+        if (seconds > 0) {
             Timestamp b_timestamp = new Timestamp(System.currentTimeMillis());
             setBreak_time(b_timestamp);
             System.out.println("break " + b_timestamp);
@@ -143,16 +132,17 @@ class Chronometer {
 
     }
 
-     void calculateBreakTime() {
-         if(duration_time != null && start_time_seconds != null) {
-             int diff = (int) (getStart_time_break().getTime() - getBreak_time().getTime());
-             items_break.add(diff);
-             System.out.println("break time result " + diff);
+    void calculateBreakTime() {
+        if (duration_time != null && start_time_seconds != null) {
+            int diff = (int) (getStart_time_break().getTime() - getBreak_time().getTime());
+            items_break.add(diff);
+            System.out.println("break time result " + diff);
 
         }
     }
-    public void calculateDuration(){
-        if(duration_time != null && start_time_seconds != null) {
+
+    public void calculateDuration() {
+        if (duration_time != null && start_time_seconds != null) {
             int duration = (int) (getDuration_time().getTime() - getStart_time_seconds().getTime());
             items_duration.add(duration);
             System.out.println("duration time result " + duration);
@@ -161,11 +151,11 @@ class Chronometer {
         }
 
     }
-    public void calculateAvgDuration(){
+
+    public void calculateAvgDuration() {
         int total = 0;
         int avg = 0;
-        for(int i = 0; i < items_duration.size(); i++)
-        {
+        for (int i = 0; i < items_duration.size(); i++) {
             total = total + (int) items_duration.get(i);
             avg = total / items_duration.size();
 
@@ -174,14 +164,14 @@ class Chronometer {
         avg_duration.add(avg);
 
     }
+
     // Reset the stopwatch when
     // the Reset button is clicked.
     // Below method gets called
     // when the Reset button is clicked.
-    public void onClickSave()
-    {
-       // running = false;
-      //  seconds = 0;
+    public void onClickSave() {
+        // running = false;
+        //  seconds = 0;
         System.out.println(items_duration);
         calculateAvgDuration();
         System.out.println(avg_duration);
@@ -207,7 +197,7 @@ class Chronometer {
     protected void runTimer(TextView timeView) {
 
         // Get the text view.
-       // final TextView timeView = (TextView) findViewById(R.id.time_view);
+        // final TextView timeView = (TextView) findViewById(R.id.time_view);
 
         // Creates a new Handler
         final Handler handler = new Handler();

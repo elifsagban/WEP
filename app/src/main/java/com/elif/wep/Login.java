@@ -1,8 +1,5 @@
 package com.elif.wep;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,20 +65,18 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     Toast.makeText(Login.this, "Enter every details", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     mAuth.signInWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Toast.makeText(Login.this, "Log in Successful", Toast.LENGTH_SHORT).show();
                                         Intent dashboardIntent = new Intent(Login.this, MainActivity.class);
                                         startActivity(dashboardIntent);
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(Login.this, "Please enter correct details", Toast.LENGTH_SHORT).show();
                                     }
 

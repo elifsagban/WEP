@@ -1,8 +1,17 @@
 package com.elif.wep;
 
+<<<<<<< HEAD
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+=======
+import android.os.Bundle;
+import android.widget.TextView;
 
+>>>>>>> fb-queries
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,13 +36,31 @@ public class Statistics extends AppCompatActivity {
     TextView statistic1, statistic2, statistic3, statistic4;
     DatabaseReference reff;
     String id;
+=======
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
+import java.util.Objects;
+
+public class Statistics extends AppCompatActivity {
+>>>>>>> fb-queries
+
+    FirebaseAuth fAuth;
+    DatabaseReference db;
+    String userID;
+    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerViewStatistics;
+    private statisticsAdapter statisticsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
+<<<<<<< HEAD
         statistic1 = (TextView) findViewById(R.id.statistic1);
         statistic2 = (TextView) findViewById(R.id.statistic2);
         statistic3 = (TextView) findViewById(R.id.statistic3);
@@ -63,5 +90,37 @@ public class Statistics extends AppCompatActivity {
 
 
     }
+=======
+        fAuth = FirebaseAuth.getInstance();
+        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+
+        recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
+        recyclerViewStatistics.setHasFixedSize(true);
+        layoutManager = new GridLayoutManager(this, 3);
+
+
+        Query taskQuery = db.orderByChild("done").equalTo(true);
+
+
+        recyclerViewStatistics.setLayoutManager(layoutManager);
+
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                .setQuery(taskQuery, TaskItem.class)
+                .build();
+
+        statisticsAdapter = new statisticsAdapter(options);
+        recyclerViewStatistics.setAdapter(statisticsAdapter);
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        statisticsAdapter.startListening();
+    }
+
+>>>>>>> fb-queries
 
 }

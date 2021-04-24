@@ -7,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -84,7 +82,6 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
             }
 
 
-
         });
 
 
@@ -102,8 +99,6 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
         private final TextView title;
         private final TextView description;
         private final ImageButton deleteButton;
-
-
 
 
         public taskViewHolder(@NonNull View itemView) {
