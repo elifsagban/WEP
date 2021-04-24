@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -37,7 +38,6 @@ public class TaskList extends AppCompatActivity {
     taskAdapter taskAdapter;
 
     private ImageButton createTask;
-    private ImageButton goalPage;
 
     private RecyclerView recyclerViewTask;
 
@@ -50,34 +50,24 @@ public class TaskList extends AppCompatActivity {
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
 
-//        goalPage =  findViewById(R.id.mainGoal);
-//        goalPage.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                openGoalPage();
-//            }
-//        });
 
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
 
-        // To display the Recycler view linearly
         recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
 
-        // It is a class provide by the FirebaseUI to make a
-        // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
-                .setQuery(db, TaskItem.class)
-                .build();
-        // Connecting object of required Adapter class to
-        // the Adapter class itself
-        taskAdapter = new taskAdapter(options);
-        // Connecting Adapter class with the Recycler view*/
-        recyclerViewTask.setAdapter(taskAdapter);
 
+        Query taskQuery = db.orderByChild("done").equalTo(false);
+
+
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                .setQuery(taskQuery, TaskItem.class)
+                .build();
+
+        taskAdapter = new taskAdapter(options);
+        recyclerViewTask.setAdapter(taskAdapter);
 
 
         createTask.setOnClickListener(new View.OnClickListener() {
@@ -126,22 +116,22 @@ public class TaskList extends AppCompatActivity {
                 String date = DateFormat.getDateInstance().format(new Date());
 
 
-                if(TextUtils.isEmpty(mTask)) {
+                if (TextUtils.isEmpty(mTask)) {
                     task.setError("Task required");
                     return;
                 }
 
-                if(TextUtils.isEmpty(mDescription)) {
+                if (TextUtils.isEmpty(mDescription)) {
                     description.setError("Description required");
                     return;
                 } else {
 
-                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id, false, null);
+                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id, 0, false);
 
                     db.child(id).setValue(taskItem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 Toast.makeText(TaskList.this, "successfully added", Toast.LENGTH_SHORT).show();
                             } else {
                                 String error = task.getException().toString();
@@ -154,7 +144,7 @@ public class TaskList extends AppCompatActivity {
 
                 }
 
-                addDialog.dismiss();;
+                addDialog.dismiss();
             }
 
         });
@@ -162,13 +152,12 @@ public class TaskList extends AppCompatActivity {
         addDialog.show();
 
 
-
     }
 
     // Function to tell the app to start getting
     // data from database on starting of the activity
-    @Override protected void onStart()
-    {
+    @Override
+    protected void onStart() {
         super.onStart();
         taskAdapter.startListening();
     }

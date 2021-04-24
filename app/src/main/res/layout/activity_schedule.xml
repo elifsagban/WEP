@@ -7,28 +7,16 @@
     tools:context=".Schedule">
 
 
-    <LinearLayout
-        android:layout_width="404dp"
-        android:layout_height="676dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/dateDay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_margin="10dp"
-            android:text="Date" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:id="@+id/doneTaskList"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="0dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"

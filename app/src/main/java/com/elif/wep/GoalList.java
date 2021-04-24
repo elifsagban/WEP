@@ -1,12 +1,5 @@
 package com.elif.wep;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,30 +8,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class GoalList extends AppCompatActivity {
 
-    private Button addGoal;
-    private RecyclerView recyclerView;
-    private String userGoalName;
-
     goalAdapter goalAdapter;
-
     FirebaseAuth fAuth;
     DatabaseReference db;
     String userID;
-
-
+    private Button addGoal;
+    private RecyclerView recyclerView;
+    private String userGoalName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +44,6 @@ public class GoalList extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("goals").child(userID);
-
 
 
         // To display the Recycler view linearly
@@ -67,7 +59,6 @@ public class GoalList extends AppCompatActivity {
         goalAdapter = new goalAdapter(options);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(goalAdapter);
-
 
 
         addGoal.setOnClickListener(new View.OnClickListener() {
@@ -88,17 +79,16 @@ public class GoalList extends AppCompatActivity {
                         userGoalName = goalName.getText().toString();
                         Toast.makeText(GoalList.this, userGoalName + " is created", Toast.LENGTH_LONG).show();
                         Goal goal = new Goal(userGoalName);
-                     //   goals.add(goal);
+                        //   goals.add(goal);
 
                         db.child(id).setValue(goal).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()) {
+                                if (task.isSuccessful()) {
                                     Toast.makeText(GoalList.this, "succesfully added", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
 
 
                     }
@@ -118,13 +108,12 @@ public class GoalList extends AppCompatActivity {
         });
 
 
-
     }
 
     // Function to tell the app to start getting
     // data from database on starting of the activity
-    @Override protected void onStart()
-    {
+    @Override
+    protected void onStart() {
         super.onStart();
         goalAdapter.startListening();
     }

@@ -1,6 +1,6 @@
 package com.elif.wep;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class TaskItem implements Serializable {
 
@@ -8,21 +8,23 @@ public class TaskItem implements Serializable {
     private String description;
     private String date;
     private String id;
-    private boolean isDone;
-    private ArrayList breaks = new ArrayList();
+
+    private int seconds;
+    private boolean done;
 
 
     public TaskItem() {
 
     }
 
-    public TaskItem(String title, String description, String date ,String id, boolean isDone, ArrayList breaks) {
+    public TaskItem(String title, String description, String date, String id, int seconds, boolean done) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.id = id;
-        this.isDone = isDone;
-        this.breaks = breaks;
+        this.seconds = seconds;
+        this.done = done;
+
 
     }
 
@@ -54,14 +56,24 @@ public class TaskItem implements Serializable {
         return id;
     }
 
-    public boolean isDone() {
-        return isDone;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public boolean getDone() {
+        return done;
     }
 
     public void setDone(boolean done) {
-        isDone = done;
+        this.done = done;
     }
-
-
 
 }
