@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="#5BFFFFFF"
+        app:contentPadding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,12 +18,37 @@
                 android:id="@+id/dialogTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Add Task"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textAlignment="center"
+                android:fontFamily="monospace"
+                android:padding="10dp"
+                android:text="Add New Task"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:text="Tackle your goals in daily doses"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialogTitle" />
+
+            <TextView
+                android:id="@+id/nameTheTask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="Name the Task"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/msg" />
 
             <EditText
                 android:id="@+id/dialogUserTitle"
@@ -30,9 +56,25 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="task name"
+                android:includeFontPadding="true"
+                android:inputType="text"
+                android:padding="20dp"
+                android:selectAllOnFocus="true"
+                android:singleLine="false"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dialogTitle"  />
+                app:layout_constraintTop_toBottomOf="@id/nameTheTask" />
+
+            <TextView
+                android:id="@+id/addDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="Add Description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialogUserTitle" />
 
             <EditText
                 android:id="@+id/dialogUserDesc"
@@ -40,28 +82,41 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="description"
+                android:padding="20dp"
                 app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addDesc"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dialogUserTitle" />
+                 />
 
             <Button
                 android:id="@+id/cancel_button"
+                style="@android:style/Widget.Holo.Button.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/add_button"
-                app:layout_constraintTop_toBottomOf="@id/dialogUserDesc"
-
-                android:text="Cancel" />
+                android:backgroundTint="#8C9EFF"
+                app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                app:iconPadding="0dp"
+                app:iconSize="30dp"
+                app:iconTint="#FAF9F4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rippleColor="#FAF6F7" />
 
             <Button
                 android:id="@+id/add_button"
+                style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/cancel_button"
+                android:background="#8C9EFF"
+                android:backgroundTint="#586DDF"
+                android:paddingLeft="20dp"
+                android:paddingTop="6dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="6dp"
+                android:text="Add Task"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dialogUserDesc"
-                android:text="Add" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialogUserDesc" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

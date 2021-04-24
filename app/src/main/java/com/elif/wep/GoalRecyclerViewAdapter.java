@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class GoalRecyclerViewAdapter extends RecyclerView.Adapter<GoalRecyclerViewAdapter.GoalViewHolder>{
+public class GoalRecyclerViewAdapter extends RecyclerView.Adapter<GoalRecyclerViewAdapter.GoalViewHolder> {
 
     ArrayList<Goal> goals;
 
@@ -42,9 +42,10 @@ public class GoalRecyclerViewAdapter extends RecyclerView.Adapter<GoalRecyclerVi
         return this.goals.size();
     }
 
-    public class GoalViewHolder  extends RecyclerView.ViewHolder{
+    public class GoalViewHolder extends RecyclerView.ViewHolder {
 
         TextView goal;
+
         public GoalViewHolder(@NonNull View itemView) {
             super(itemView);
             goal = itemView.findViewById(R.id.goalItem);

@@ -1,96 +1,62 @@
 package com.elif.wep;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+
+import java.util.Objects;
 
 public class Statistics extends AppCompatActivity {
-    private ImageButton statPage;
-    private ImageButton planPage;
-    private ImageButton homePage;
-    private ImageButton taskPage;
-    private ImageButton profilePage;
 
+    FirebaseAuth fAuth;
+    DatabaseReference db;
+    String userID;
+    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView recyclerViewStatistics;
+    private statisticsAdapter statisticsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        statPage = (ImageButton) findViewById(R.id.statPage);
-        statPage.setOnClickListener(new View.OnClickListener() {
+        fAuth = FirebaseAuth.getInstance();
+        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
-            @Override
-            public void onClick(View v) {
+        recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
+        recyclerViewStatistics.setHasFixedSize(true);
+        layoutManager = new GridLayoutManager(this, 3);
 
-                openStatsPage();
 
-            }
-        });
-        planPage = (ImageButton) findViewById(R.id.planPage);
-        planPage.setOnClickListener(new View.OnClickListener() {
+        Query taskQuery = db.orderByChild("done").equalTo(true);
 
-            @Override
-            public void onClick(View v) {
 
-                openPlanPage();
+        recyclerViewStatistics.setLayoutManager(layoutManager);
 
-            }
-        });
-        homePage = (ImageButton) findViewById(R.id.homePage);
-        homePage.setOnClickListener(new View.OnClickListener() {
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                .setQuery(taskQuery, TaskItem.class)
+                .build();
 
-            @Override
-            public void onClick(View v) {
+        statisticsAdapter = new statisticsAdapter(options);
+        recyclerViewStatistics.setAdapter(statisticsAdapter);
 
-                openHomePage();
 
-            }
-        });
-        taskPage = (ImageButton) findViewById(R.id.taskPage);
-        taskPage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                openTaskPage();
-
-            }
-        });
-        profilePage = (ImageButton) findViewById(R.id.profilePage);
-        profilePage.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                openProfilePage();
-
-            }
-        });
     }
-    public void openStatsPage() {
-        Intent intent = new Intent(this, Statistics.class);
-        startActivity(intent);
-    }
-    private void openPlanPage() {
-        Intent intent = new Intent(this, Schedule.class);
-        startActivity(intent);
-    }
-    private void openHomePage() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-    private void openTaskPage() {
-        Intent intent = new Intent(this, TaskList.class);
-        startActivity(intent);
-    }
-    private void openProfilePage() {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        statisticsAdapter.startListening();
     }
 
 

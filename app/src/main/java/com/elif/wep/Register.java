@@ -1,28 +1,21 @@
 package com.elif.wep;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -59,20 +52,20 @@ public class Register extends AppCompatActivity {
                 String name = nameText.getText().toString();
                 String email = emailText.getText().toString();
                 String password = passwordText.getText().toString();
-                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(name) || TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(name) || TextUtils.isEmpty(password)) {
                     Toast.makeText(Register.this, "Fill out each cell!", Toast.LENGTH_SHORT).show();
-                }else if (password.length() < 6){
+                } else if (password.length() < 6) {
                     Toast.makeText(Register.this, "Please enter a password more than 6 characters", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
 
                                 Toast.makeText(Register.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
 
 
-                            }else{
+                            } else {
                                 Toast.makeText(Register.this, "The user is not registered!", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -82,7 +75,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    public void openLoginPage(){
+    public void openLoginPage() {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
 
