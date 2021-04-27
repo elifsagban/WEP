@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -45,7 +47,7 @@ public class TaskList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_list);
+        setContentView(R.layout.task_list_with_picture);
 
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
@@ -92,7 +94,6 @@ public class TaskList extends AppCompatActivity {
         alertDialog.setView(view);
 
         AlertDialog addDialog = alertDialog.create();
-        addDialog.setCancelable(false);
 
         final EditText task = view.findViewById(R.id.dialogUserTitle);
         final EditText description = view.findViewById(R.id.dialogUserDesc);
@@ -100,12 +101,7 @@ public class TaskList extends AppCompatActivity {
         Button save = view.findViewById(R.id.add_button);
         Button cancel = view.findViewById(R.id.cancel_button);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addDialog.dismiss();
-            }
-        });
+
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +109,11 @@ public class TaskList extends AppCompatActivity {
                 String mTask = task.getText().toString().trim();
                 String mDescription = description.getText().toString().trim();
                 String id = db.push().getKey();
-                String date = DateFormat.getDateInstance().format(new Date());
+                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm, dd/MM/yyyy ");
+                Date d = new Date();
+                String date = formatter.format(d);
+                ArrayList<Integer> duration = new ArrayList();
+                ArrayList<Integer> breaks = new ArrayList();
 
 
                 if (TextUtils.isEmpty(mTask)) {
@@ -126,7 +126,7 @@ public class TaskList extends AppCompatActivity {
                     return;
                 } else {
 
-                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id, 0, false);
+                    TaskItem taskItem = new TaskItem(mTask, mDescription, date, id, 0, false, breaks, duration);
 
                     db.child(id).setValue(taskItem).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

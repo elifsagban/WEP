@@ -1,6 +1,7 @@
 package com.elif.wep;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class TaskItem implements Serializable {
 
@@ -13,17 +14,24 @@ public class TaskItem implements Serializable {
     private boolean done;
 
 
+    ArrayList<Integer> breaks;
+    ArrayList<Integer> duration;
+
+
     public TaskItem() {
 
     }
 
-    public TaskItem(String title, String description, String date, String id, int seconds, boolean done) {
+    public TaskItem(String title, String description, String date, String id, int seconds, boolean done,
+                    ArrayList<Integer> breaks, ArrayList<Integer> duration) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.id = id;
         this.seconds = seconds;
         this.done = done;
+        this.breaks = breaks;
+        this.duration = duration;
 
 
     }
@@ -74,6 +82,48 @@ public class TaskItem implements Serializable {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public ArrayList<Integer> getBreaks() {
+        return breaks;
+    }
+
+    public void setBreaks(ArrayList<Integer> breaks) {
+        this.breaks = breaks;
+    }
+
+    public ArrayList<Integer> getDuration() {
+        return duration;
+    }
+
+    public void setDuration(ArrayList<Integer> duration) {
+        this.duration = duration;
+    }
+
+    public int countBreaks() {
+        int breaks = 0;
+
+        if (getBreaks() != null) {
+            for (int i = 0; i < getBreaks().size(); i++) {
+                breaks++;
+            }
+        }
+
+        return breaks;
+    }
+
+    public int totalDuration() {
+        int totalDuration = 0;
+
+        if (getDuration() != null) {
+
+            for (int i = 0; i < getDuration().size(); i++) {
+                totalDuration += getDuration().get(i);
+
+            }
+        }
+
+        return totalDuration;
     }
 
 }

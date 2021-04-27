@@ -36,6 +36,10 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
 
         holder.title.setText(model.getTitle());
         holder.description.setText(model.getDescription());
+        String date_time = model.getDate().split(",")[0];
+        holder.date.setText(date_time);
+
+
 
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
@@ -54,35 +58,35 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
             }
         });
 
-        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                AlertDialog.Builder checkTaskDialog = new AlertDialog.Builder(holder.itemView.getRootView().getContext());
+//                checkTaskDialog.setTitle("Delete");
+//                checkTaskDialog.setCancelable(false);
+//                checkTaskDialog.setMessage("Do you want to delete it?");
+//                checkTaskDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        db.child(id).removeValue();
+//
+//
+//                    }
+//                });
 
-                AlertDialog.Builder checkTaskDialog = new AlertDialog.Builder(holder.itemView.getRootView().getContext());
-                checkTaskDialog.setTitle("Delete");
-                checkTaskDialog.setCancelable(false);
-                checkTaskDialog.setMessage("Do you want to delete it?");
-                checkTaskDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        db.child(id).removeValue();
+//                checkTaskDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        dialogInterface.cancel();
+//                    }
+//                });
+//
+//                checkTaskDialog.show();
+//            }
 
 
-                    }
-                });
-
-                checkTaskDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-
-                checkTaskDialog.show();
-            }
-
-
-        });
+ //       });
 
 
     }
@@ -90,7 +94,7 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
     @NonNull
     @Override
     public taskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_view_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.task_item_design, parent, false);
         return new taskViewHolder(view);
     }
 
@@ -98,7 +102,8 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
 
         private final TextView title;
         private final TextView description;
-        private final ImageButton deleteButton;
+        private final TextView date;
+       // private final ImageButton deleteButton;
 
 
         public taskViewHolder(@NonNull View itemView) {
@@ -106,7 +111,8 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
 
             title = itemView.findViewById(R.id.taskTitle);
             description = itemView.findViewById(R.id.description);
-            deleteButton = itemView.findViewById(R.id.deleteTask);
+            date = itemView.findViewById(R.id.date);
+           // deleteButton = itemView.findViewById(R.id.deleteTask);
 
         }
     }
