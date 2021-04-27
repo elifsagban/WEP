@@ -19,8 +19,15 @@ public class statisticsAdapter extends FirebaseRecyclerAdapter<TaskItem, statist
 
     @Override
     protected void onBindViewHolder(@NonNull statisticsAdapter.taskViewHolder holder, int position, @NonNull TaskItem model) {
-        holder.statistic1.setText(model.getTitle());
-        holder.statistic2.setText(Integer.toString(model.getSeconds()));
+
+        if (model.getDone() == true) {
+            holder.statistic1.setText(model.getTitle());
+            holder.statistic2.setText(Integer.toString(model.getSeconds()));
+            holder.statistic3.setText(Integer.toString(model.countBreaks()));
+            holder.statistic4.setText(Integer.toString(model.totalDuration()));
+
+        }
+
 
     }
 

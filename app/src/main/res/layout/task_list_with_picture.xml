@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="419dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/dark_mountains_foreground" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="140dp"
+        android:fontFamily="serif-monospace"
+        android:text="Plan Your Day"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#E4D3D3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="serif-monospace"
+        android:gravity="start"
+        android:text="Tasks"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewTask"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="124dp"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.18"
+        tools:itemCount="20">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTaskList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
+
+        android:backgroundTint="#1AFFFAFA"
+        android:clickable="true"
+        android:tint="#E4D3D3"
+        app:backgroundTintMode="src_atop"
+        app:borderWidth="0dp"
+        app:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:pressedTranslationZ="1dp"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:useCompatPadding="false" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/statPage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/stat_icon_foreground" />
+
+        <ImageButton
+            android:id="@+id/planPage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/plan_icon_foreground" />
+
+        <ImageButton
+            android:id="@+id/homePage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/home_icon_foreground" />
+
+        <ImageButton
+            android:id="@+id/taskPage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/task_icon_foreground" />
+
+        <ImageButton
+            android:id="@+id/profilePage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@mipmap/user_icon_foreground" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

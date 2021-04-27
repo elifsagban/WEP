@@ -35,7 +35,7 @@ public class Statistics extends AppCompatActivity {
 
         recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
         recyclerViewStatistics.setHasFixedSize(true);
-        layoutManager = new GridLayoutManager(this, 3);
+        layoutManager = new GridLayoutManager(this, 1);
 
 
         Query taskQuery = db.orderByChild("done").equalTo(true);
