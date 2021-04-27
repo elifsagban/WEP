@@ -25,12 +25,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:layout_marginBottom="124dp"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/taskLists"
-        app:layout_constraintVertical_bias="0.18"
         tools:itemCount="20">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -39,53 +36,13 @@
         android:id="@+id/addTaskList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="#C2185B"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        android:clickable="true"
+        android:tint="@android:color/white"
+        app:backgroundTint="#C2185B"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recycleViewTask"
-        android:tint="@android:color/white"
         app:srcCompat="@android:drawable/ic_input_add" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/statPage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/stat_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/planPage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/plan_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/homePage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/home_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/taskPage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/task_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/profilePage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@mipmap/user_icon_foreground" />
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

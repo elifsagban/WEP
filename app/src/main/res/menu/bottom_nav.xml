@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Home"
+        android:id="@+id/home_item"
+        android:icon="@drawable/ic_home"
+        />
+    <item
+        android:title="Task List"
+        android:id="@+id/task_item"
+        android:icon="@drawable/ic_list"
+        />
+    <item
+        android:title="Schedule"
+        android:id="@+id/plan_item"
+        android:icon="@drawable/ic_date"
+        />
+    <item
+        android:title="statistics"
+        android:id="@+id/stat_item"
+        android:icon="@drawable/ic_chart"
+        />
+</menu>
