@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -48,7 +50,37 @@ public class TaskList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list_with_picture);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.task_item);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            private MenuItem item;
 
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                this.item = item;
+                switch (item.getItemId()){
+                    case R.id.home_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , MainActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.task_item:
+                        return true;
+                    case R.id.plan_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Schedule.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.stat_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Statistics.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
 
