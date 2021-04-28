@@ -22,6 +22,15 @@
             android:layout_height="match_parent"
             android:padding="30dp">
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@mipmap/reward_foreground" />
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
@@ -31,37 +40,65 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
             <TextView
                 android:id="@+id/msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save if you finish the task. Or you can pause and continue later."
+                android:gravity="center"
+                android:text="Save if you finished the task. Or you can pause and continue later."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
 
-            <Button
-                android:id="@+id/continueBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Continue"
-                app:layout_constraintEnd_toStartOf="@id/saveButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/msg" />
 
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@id/linearLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_margin="10dp"
-                android:text="Save"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/continueBtn"
-                app:layout_constraintTop_toBottomOf="@id/msg" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/msg">
 
+
+                <Button
+                    android:id="@+id/continueBtn"
+                    style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="#17215A"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="6dp"
+                    android:text="Continue"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/saveButton"
+                    style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="#17215A"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="6dp"
+                    android:text="Save"
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
