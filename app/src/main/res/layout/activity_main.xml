@@ -15,55 +15,21 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="75dp"
         android:text="Register"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageButton
-            android:id="@+id/statPage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
-            android:background="@mipmap/stat_icon_foreground"/>
-
-        <ImageButton
-            android:id="@+id/planPage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
-            android:background="@mipmap/plan_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/homePage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
-            android:background="@mipmap/home_icon_foreground" />
-
-        <ImageButton
-            android:id="@+id/taskPage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
-            android:background="@mipmap/task_icon_foreground" />
-
-
-        <ImageButton
-            android:id="@+id/profilePage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
-            android:background="@mipmap/user_icon_foreground" />
-    </LinearLayout>
-
+        app:itemBackground="@color/white"
+        android:background="@color/white"
+        app:itemIconTint="@color/purple_700"
+        app:itemTextColor="@color/purple_700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
