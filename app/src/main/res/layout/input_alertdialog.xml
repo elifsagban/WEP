@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:layout_marginTop="5dp"
-                android:text="Add New Task"
+                android:text="Add a New Task"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
-                android:text="Name the Task"
+                android:text="Task Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/msg" />
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
-                android:text="Add Description"
+                android:text="Description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dialogUserTitle" />

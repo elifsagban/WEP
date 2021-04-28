@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.Objects;
 
@@ -47,46 +49,50 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
 
         String id = model.getId();
 
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(holder.itemView.getContext(), TaskTimer.class);
-                intent.putExtra("task", model);
-                holder.itemView.getContext().startActivity(intent);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(holder.mView.getContext());
+                LayoutInflater layoutInflater = LayoutInflater.from(holder.mView.getContext());
 
+                View dialog_view = layoutInflater.inflate(R.layout.multiple_selection_alert_dialog, null);
+                alertDialog.setView(dialog_view);
+
+                AlertDialog dialog = alertDialog.create();
+
+                Button deleteBtn = dialog_view.findViewById(R.id.deleteButton);
+                Button studyBtn = dialog_view.findViewById(R.id.studyButton);
+
+                deleteBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        db.child(id).removeValue();
+                        dialog.dismiss();
+
+
+
+                    }
+                });
+
+                studyBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(holder.itemView.getContext(), TaskTimer.class);
+                        intent.putExtra("task", model);
+                        holder.itemView.getContext().startActivity(intent);
+                        dialog.dismiss();
+
+
+                    }
+                });
+
+                dialog.show();
             }
+
+
         });
-
-//        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                AlertDialog.Builder checkTaskDialog = new AlertDialog.Builder(holder.itemView.getRootView().getContext());
-//                checkTaskDialog.setTitle("Delete");
-//                checkTaskDialog.setCancelable(false);
-//                checkTaskDialog.setMessage("Do you want to delete it?");
-//                checkTaskDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        db.child(id).removeValue();
-//
-//
-//                    }
-//                });
-
-//                checkTaskDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.cancel();
-//                    }
-//                });
-//
-//                checkTaskDialog.show();
-//            }
-
-
- //       });
 
 
     }
@@ -103,7 +109,8 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
         private final TextView title;
         private final TextView description;
         private final TextView date;
-       // private final ImageButton deleteButton;
+        private final  View mView;
+
 
 
         public taskViewHolder(@NonNull View itemView) {
@@ -112,8 +119,10 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
             title = itemView.findViewById(R.id.taskTitle);
             description = itemView.findViewById(R.id.description);
             date = itemView.findViewById(R.id.date);
-           // deleteButton = itemView.findViewById(R.id.deleteTask);
+            mView = itemView;
 
         }
     }
+
+
 }

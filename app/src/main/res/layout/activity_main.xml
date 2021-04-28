@@ -8,16 +8,67 @@
     tools:context=".MainActivity">
 
 
-    <Button
-        android:id="@+id/mainRegister"
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/animation_view"
+        app:lottie_rawRes="@raw/working"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+
+    <LinearLayout
+        android:id="@id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="75dp"
-        android:text="Register"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/animation_view">
 
+
+        <Button
+            android:id="@+id/mainRegister"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:backgroundTint="#17215A"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="6dp"
+            android:text="Register"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/mainLogout"
+            style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:backgroundTint="#17215A"
+            android:paddingLeft="20dp"
+            android:paddingTop="8dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="6dp"
+            android:text="Logout"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
