@@ -131,8 +131,6 @@ public class TaskList extends AppCompatActivity {
         final EditText description = view.findViewById(R.id.dialogUserDesc);
 
         Button save = view.findViewById(R.id.add_button);
-        Button cancel = view.findViewById(R.id.cancel_button);
-
 
 
         save.setOnClickListener(new View.OnClickListener() {

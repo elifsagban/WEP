@@ -36,7 +36,7 @@ public class TaskTimer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_timer);
+        setContentView(R.layout.timer_design);
 
 
         Chronometer chronometer = new Chronometer();
