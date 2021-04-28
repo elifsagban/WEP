@@ -50,6 +50,8 @@ public class TaskList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list_with_picture);
+
+        // bottom navigation menu //
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.task_item);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,42 +83,58 @@ public class TaskList extends AppCompatActivity {
                 return false;
             }
         });
+
+        // bottom navigation menu //
+
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
-
-
         fAuth = FirebaseAuth.getInstance();
-        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
-        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
+        if (fAuth.getCurrentUser() != null) {
+            firebaseCallDB();
+        }
+        else {
+            Toast.makeText(TaskList.this, "You need to register!", Toast.LENGTH_SHORT).show();
 
-        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
-
-
-        Query taskQuery = db.orderByChild("done").equalTo(false);
-
-
-        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
-                .setQuery(taskQuery, TaskItem.class)
-                .build();
-
-        taskAdapter = new taskAdapter(options);
-        recyclerViewTask.setAdapter(taskAdapter);
+        }
 
 
         createTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addTask();
+
+                if (fAuth.getCurrentUser() != null) {
+                    addTask();
+
+                }
+                else {
+                    Toast.makeText(TaskList.this, "You need to register!", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
         });
     }
 
 
-    private void openGoalPage() {
-        Intent intent = new Intent(this, GoalList.class);
-        startActivity(intent);
+    private void firebaseCallDB() {
+
+
+            userID = (fAuth.getCurrentUser()).getUid();
+            db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+            recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
+            Query taskQuery = db.orderByChild("done").equalTo(false);
+            FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                    .setQuery(taskQuery, TaskItem.class)
+                    .build();
+
+            taskAdapter = new taskAdapter(options);
+            recyclerViewTask.setAdapter(taskAdapter);
+
     }
+
+
+
 
     private void addTask() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(TaskList.this);
@@ -188,8 +206,14 @@ public class TaskList extends AppCompatActivity {
     // data from database on starting of the activity
     @Override
     protected void onStart() {
-        super.onStart();
-        taskAdapter.startListening();
+
+        if (fAuth.getCurrentUser() != null) {
+            super.onStart();
+            taskAdapter.startListening();
+        } else {
+            super.onStart();
+
+        }
     }
 
 

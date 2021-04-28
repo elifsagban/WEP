@@ -7,28 +7,22 @@
     android:layout_height="match_parent"
     >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="419dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/dark_mountains_foreground" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="140dp"
-        android:fontFamily="serif-monospace"
-        android:text="Plan Your Day"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#E4D3D3"
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/animation_view"
+        android:background="#17215A"
+        app:lottie_rawRes="@raw/bluetask"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+
 
     <TextView
         android:id="@+id/textView3"
@@ -41,7 +35,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="28dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        app:layout_constraintTop_toBottomOf="@id/animation_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTask"
@@ -62,19 +56,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
-
-        android:backgroundTint="#1AFFFAFA"
+        android:layout_marginStart="180dp"
+        android:backgroundTint="@color/purple_700"
         android:clickable="true"
         android:tint="#E4D3D3"
-        app:backgroundTintMode="src_atop"
         app:borderWidth="0dp"
-        app:elevation="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/textView2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:pressedTranslationZ="1dp"
+        app:layout_constraintStart_toEndOf="@id/textView3"
+        app:layout_constraintBottom_toTopOf="@id/recycleViewTask"
         app:srcCompat="@android:drawable/ic_input_add"
         app:useCompatPadding="false" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
