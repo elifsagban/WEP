@@ -40,9 +40,7 @@ public class TaskList extends AppCompatActivity {
     String userID;
 
     taskAdapter taskAdapter;
-
     private ImageButton createTask;
-
     private RecyclerView recyclerViewTask;
 
 
@@ -51,40 +49,7 @@ public class TaskList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list_with_picture);
 
-        // bottom navigation menu //
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.task_item);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            private MenuItem item;
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                this.item = item;
-                switch (item.getItemId()){
-                    case R.id.home_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.task_item:
-                        return true;
-                    case R.id.plan_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , Schedule.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.stat_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , Statistics.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                }
-                return false;
-            }
-        });
-
-        // bottom navigation menu //
+       navigationMenu();
 
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
@@ -97,7 +62,6 @@ public class TaskList extends AppCompatActivity {
             Toast.makeText(TaskList.this, "You need to register!", Toast.LENGTH_SHORT).show();
 
         }
-
 
         createTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +178,46 @@ public class TaskList extends AppCompatActivity {
             super.onStart();
 
         }
+    }
+
+
+    private void navigationMenu() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.task_item);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            private MenuItem item;
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                this.item = item;
+                switch (item.getItemId()) {
+                    case R.id.home_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.task_item:
+                        return true;
+                    case R.id.plan_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Schedule.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.stat_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Statistics.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.profile_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Profile.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
     }
 
 

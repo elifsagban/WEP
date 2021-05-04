@@ -46,6 +46,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:6.2.1'
     // dependency for lottie
     implementation "com.airbnb.android:lottie:3.7.0"
+    // navigation drawer material
+    implementation 'com.google.android.material:material:1.1.0'
+
 
 
 }

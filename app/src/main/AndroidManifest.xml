@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".TaskTimer"></activity>
+        <activity android:name=".TaskTimer"/>
         <activity android:name=".Schedule" />
         <activity android:name=".Statistics" />
         <activity android:name=".GoalList" />
         <activity android:name=".TaskList" />
-        <activity android:name=".Profile" />
+        <activity android:name=".Profile"  android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
         <activity android:name=".Register" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity">

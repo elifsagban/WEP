@@ -20,4 +20,11 @@
         android:id="@+id/stat_item"
         android:icon="@drawable/ic_chart"
         />
+
+    <item
+        android:title="profile"
+        android:id="@+id/profile_item"
+        android:icon="@drawable/ic_profile"
+
+        />
 </menu>
