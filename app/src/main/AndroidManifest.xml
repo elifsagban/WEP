@@ -15,8 +15,8 @@
         <activity android:name=".GoalList" />
         <activity android:name=".TaskList" />
         <activity android:name=".Profile"  android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
-        <activity android:name=".Register" />
-        <activity android:name=".Login" />
+        <activity android:name=".Register" android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"  />
+        <activity android:name=".Login" android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,11 +1,13 @@
 package com.elif.wep;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -24,8 +26,7 @@ public class Profile extends AppCompatActivity {
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public NavigationView navigation;
 
-    FirebaseAuth mAuth;
-
+    FirebaseAuth fAuth;
 
 
 
@@ -34,12 +35,23 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-       navigationMenu();
+        fAuth = FirebaseAuth.getInstance();
 
-        drawerLayout = findViewById(R.id.my_drawer_layout);
-        navigation = (NavigationView)  findViewById(R.id.navigation_menu);
-       // navigationMenu.getMenu().clear();
-       // navigationMenu.inflateMenu(R.menu.menu_user); //inflate new items.
+        drawerNav();
+
+
+        // change menu if user logged-in
+
+        if (fAuth.getCurrentUser() != null) {
+            navigation.getMenu().clear();
+            navigation.inflateMenu(R.menu.menu_user); //inflate new items.
+        }
+
+        if(fAuth.getCurrentUser() == null) {
+            navigation.getMenu().clear();
+            navigation.inflateMenu(R.menu.menu); //inflate new items.
+        }
+
 
         navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -48,7 +60,6 @@ public class Profile extends AppCompatActivity {
                 switch(id)
                 {
                     case R.id.nav_login:
-                        Toast.makeText(Profile.this, "Settings",Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext()
                                 , Login.class));
                         overridePendingTransition(0, 0);
@@ -58,6 +69,14 @@ public class Profile extends AppCompatActivity {
                                     , Register.class));
                             overridePendingTransition(0, 0);
                             return true;
+                    case R.id.nav_account:
+                        startActivity(new Intent(getApplicationContext()
+                                , Profile.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.nav_logout:
+                        logout();
+                        return true;
                     default:
                         return true;
                 }
@@ -68,40 +87,30 @@ public class Profile extends AppCompatActivity {
 
 
 
+    }
 
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+    public void logout() {
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        AlertDialog alertDialog = new AlertDialog.Builder(Profile.this).create();
+        alertDialog.setTitle("WEP");
+        alertDialog.setMessage("Do you want to sign out?");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        fAuth.signOut();
+                        Toast.makeText(Profile.this, "You logged out.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext()
+                                , MainActivity.class));
+                        overridePendingTransition(0, 0);
 
-        //        registerBtn = (Button) findViewById(R.id.mainRegister);
-//        registerBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                openRegisterPage();
-//
-//            }
-//        });
-
-//        LogoutBtn = (Button) findViewById(R.id.mainLogout);
-//        LogoutBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                mAuth.signOut();
-//                System.out.println("user sign-out");
-//
-//            }
-//        });
-
-
+                    }
+                });
+        alertDialog.show();
 
     }
 
+
+    // toggle button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -111,51 +120,19 @@ public class Profile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void drawerNav() {
+
+        drawerLayout = findViewById(R.id.my_drawer_layout);
+        navigation = (NavigationView)  findViewById(R.id.navigation_menu);
+        navigation.bringToFront();
 
 
-    private void navigationMenu() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.profile_item);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            private MenuItem item;
 
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                this.item = item;
-                switch (item.getItemId()) {
-                    case R.id.home_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , MainActivity.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                        case R.id.task_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , TaskList.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.plan_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , Schedule.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.stat_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , Statistics.class));
-                        overridePendingTransition(0, 0);
-                        return true;
-                    case R.id.profile_item:
-                        return true;
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
-                }
-                return false;
-            }
-        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-    private void openRegisterPage() {
-        Intent intent = new Intent(this, Register.class);
-        startActivity(intent);
-    }
-
 
 }
