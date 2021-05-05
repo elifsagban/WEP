@@ -32,57 +32,13 @@ public class Statistics extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.stat_item);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            private MenuItem item;
 
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                this.item = item;
-                switch (item.getItemId()){
-                    case R.id.home_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.task_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , TaskList.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.plan_item:
-                        startActivity(new Intent(getApplicationContext()
-                                , Schedule.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.stat_item:
-                        return true;
+        // nav bar
+         navigationMenu();
 
-                }
-                return false;
-            }
-        });
-        fAuth = FirebaseAuth.getInstance();
-        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
-        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
-
-        recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
-        recyclerViewStatistics.setHasFixedSize(true);
-        layoutManager = new GridLayoutManager(this, 1);
+         firebaseAdapter();
 
 
-        Query taskQuery = db.orderByChild("done").equalTo(true);
-
-
-        recyclerViewStatistics.setLayoutManager(layoutManager);
-
-        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
-                .setQuery(taskQuery, TaskItem.class)
-                .build();
-
-        statisticsAdapter = new statisticsAdapter(options);
-        recyclerViewStatistics.setAdapter(statisticsAdapter);
 
 
     }
@@ -91,6 +47,66 @@ public class Statistics extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         statisticsAdapter.startListening();
+    }
+
+    private void navigationMenu() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.stat_item);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            private MenuItem item;
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                this.item = item;
+                switch (item.getItemId()) {
+                    case R.id.home_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                        case R.id.task_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , TaskList.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.plan_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Schedule.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.stat_item:
+                        return true;
+                    case R.id.profile_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Profile.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                }
+                return false;
+            }
+        });
+    }
+
+    private void firebaseAdapter() {
+
+        fAuth = FirebaseAuth.getInstance();
+        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+
+        recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
+        recyclerViewStatistics.setHasFixedSize(true);
+        recyclerViewStatistics.setLayoutManager(layoutManager);
+
+
+        Query taskQuery = db.orderByChild("done").equalTo(true);
+
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                .setQuery(taskQuery, TaskItem.class)
+                .build();
+
+        statisticsAdapter = new statisticsAdapter(options);
+        recyclerViewStatistics.setAdapter(statisticsAdapter);
     }
 
 

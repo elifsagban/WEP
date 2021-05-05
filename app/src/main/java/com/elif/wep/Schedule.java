@@ -32,39 +32,60 @@ public class Schedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
+
+        // navigation Menu
+        navigationMenu();
+
+        firebaseAdapter();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        scheduleAdapter.startListening();
+    }
+
+    private void navigationMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.plan_item);
+        bottomNavigationView.setSelectedItemId(R.id.stat_item);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             private MenuItem item;
 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 this.item = item;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home_item:
                         startActivity(new Intent(getApplicationContext()
                                 , MainActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.task_item:
                         startActivity(new Intent(getApplicationContext()
                                 , TaskList.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.plan_item:
                         return true;
                     case R.id.stat_item:
                         startActivity(new Intent(getApplicationContext()
                                 , Statistics.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
-
-
+                    case R.id.profile_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Profile.class));
+                        overridePendingTransition(0, 0);
+                        return true;
 
                 }
                 return false;
             }
         });
+    }
+
+    private void firebaseAdapter() {
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
@@ -82,18 +103,7 @@ public class Schedule extends AppCompatActivity {
 
         scheduleAdapter = new scheduleAdapter(options);
         recyclerViewSchedule.setAdapter(scheduleAdapter);
-
-
     }
-
-    // Function to tell the app to start getting
-    // data from database on starting of the activity
-    @Override
-    protected void onStart() {
-        super.onStart();
-        scheduleAdapter.startListening();
-    }
-
 
 
 }
