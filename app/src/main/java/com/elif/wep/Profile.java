@@ -38,7 +38,7 @@ public class Profile extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
 
         drawerNav();
-
+        navigationMenu();
 
         // change menu if user logged-in
 
@@ -134,5 +134,44 @@ public class Profile extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    private void navigationMenu() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.profile_item);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            private MenuItem item;
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                this.item = item;
+                switch (item.getItemId()) {
+                    case R.id.home_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , MainActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.task_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , TaskList.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.plan_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Schedule.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.stat_item:
+                        startActivity(new Intent(getApplicationContext()
+                                , Statistics.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                    case R.id.profile_item:
+                        return true;
+
+                }
+                return false;
+            }
+        });
+    }
+
 
 }

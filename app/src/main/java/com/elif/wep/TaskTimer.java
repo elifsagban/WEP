@@ -1,6 +1,8 @@
 package com.elif.wep;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,12 +37,18 @@ public class TaskTimer extends AppCompatActivity {
     private Button pauseButton;
     private Button saveButton;
     private TaskItem taskItem;
-
+    private Boolean value;
+    private Boolean startPress;
+    private Boolean pausePress;
+    private Boolean savePress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer_design);
-
+        //get switch button value from schedule activity
+        SharedPreferences sharedPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
+        value = sharedPreferences.getBoolean("value", true);
+        System.out.println(value);
 
         Chronometer chronometer = new Chronometer();
         TextView time_view = findViewById(R.id.time_view);
@@ -92,7 +102,7 @@ public class TaskTimer extends AppCompatActivity {
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
-        chronometer.runTimer(time_view);
+        chronometer.runTimer(time_view, value);
         startChronometer(chronometer);
         pauseChronometer(chronometer);
         saveChronometer(chronometer);
@@ -104,7 +114,12 @@ public class TaskTimer extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 chronometer.onClickStart();
+                startPress = true;
+                pausePress = false;
+                changeBtnColor();
+
             }
+
         });
     }
 
@@ -112,7 +127,10 @@ public class TaskTimer extends AppCompatActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                pausePress = true;
+                startPress = false;
                 chronometer.onClickStop();
+                changeBtnColor();
 
             }
         });
@@ -122,9 +140,11 @@ public class TaskTimer extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startPress = false;
+                pausePress = false;
                 finishTask(chronometer);
                 chronometer.onPause();
-
+                changeBtnColor();
 
             }
         });
@@ -194,6 +214,16 @@ public class TaskTimer extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
+    }
+
+    private void changeBtnColor(){
+        if (pausePress){
+            pauseButton.setBackgroundColor(Color.parseColor("#8f36db"));
+            startButton.setBackgroundColor(Color.parseColor("#17215A"));
+        }else if (startPress){
+            startButton.setBackgroundColor(Color.parseColor("#8f36db"));
+            pauseButton.setBackgroundColor(Color.parseColor("#17215A"));
+        }
     }
 
 }
