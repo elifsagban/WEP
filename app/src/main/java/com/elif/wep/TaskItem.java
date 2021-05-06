@@ -1,5 +1,7 @@
 package com.elif.wep;
 
+import android.renderscript.RenderScript;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,8 +14,6 @@ public class TaskItem implements Serializable {
 
     private int seconds;
     private boolean done;
-
-
     ArrayList<Integer> breaks;
     ArrayList<Integer> duration;
 
@@ -32,8 +32,6 @@ public class TaskItem implements Serializable {
         this.done = done;
         this.breaks = breaks;
         this.duration = duration;
-
-
     }
 
     public String getTitle() {
@@ -125,5 +123,5 @@ public class TaskItem implements Serializable {
 
         return totalDuration;
     }
-
+    
 }
