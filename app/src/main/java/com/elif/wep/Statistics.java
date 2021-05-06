@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -24,7 +25,6 @@ public class Statistics extends AppCompatActivity {
     FirebaseAuth fAuth;
     DatabaseReference db;
     String userID;
-    RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerViewStatistics;
     private statisticsAdapter statisticsAdapter;
 
@@ -36,8 +36,23 @@ public class Statistics extends AppCompatActivity {
         // nav bar
          navigationMenu();
 
-         firebaseAdapter();
 
+        fAuth = FirebaseAuth.getInstance();
+        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+
+        recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
+        recyclerViewStatistics.setLayoutManager(new LinearLayoutManager(this));
+
+
+        Query taskQuery = db.orderByChild("done").equalTo(true);
+
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+                .setQuery(taskQuery, TaskItem.class)
+                .build();
+
+        statisticsAdapter = new statisticsAdapter(options);
+        recyclerViewStatistics.setAdapter(statisticsAdapter);
 
 
 
@@ -90,23 +105,6 @@ public class Statistics extends AppCompatActivity {
 
     private void firebaseAdapter() {
 
-        fAuth = FirebaseAuth.getInstance();
-        userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
-        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
-
-        recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
-        recyclerViewStatistics.setHasFixedSize(true);
-        recyclerViewStatistics.setLayoutManager(layoutManager);
-
-
-        Query taskQuery = db.orderByChild("done").equalTo(true);
-
-        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
-                .setQuery(taskQuery, TaskItem.class)
-                .build();
-
-        statisticsAdapter = new statisticsAdapter(options);
-        recyclerViewStatistics.setAdapter(statisticsAdapter);
     }
 
 
