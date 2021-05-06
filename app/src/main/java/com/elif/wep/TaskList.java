@@ -1,14 +1,18 @@
 package com.elif.wep;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +44,7 @@ public class TaskList extends AppCompatActivity {
     String userID;
 
     taskAdapter taskAdapter;
+    taskAdapter taskAdapterSearch;
     private ImageButton createTask;
     private RecyclerView recyclerViewTask;
 
@@ -49,11 +54,18 @@ public class TaskList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_list_with_picture);
 
-       navigationMenu();
+        navigationMenu();
 
         createTask = findViewById(R.id.addTaskList);
         recyclerViewTask = findViewById(R.id.recycleViewTask);
         fAuth = FirebaseAuth.getInstance();
+
+        userID = (fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
+
+
+
 
         if (fAuth.getCurrentUser() != null) {
             firebaseCallDB();
@@ -78,15 +90,13 @@ public class TaskList extends AppCompatActivity {
 
             }
         });
+
     }
 
 
-    private void firebaseCallDB() {
 
+    private void firebaseCallDB( ) {
 
-            userID = (fAuth.getCurrentUser()).getUid();
-            db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
-            recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
             Query taskQuery = db.orderByChild("done").equalTo(false);
             FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
                     .setQuery(taskQuery, TaskItem.class)
@@ -101,6 +111,8 @@ public class TaskList extends AppCompatActivity {
 
 
     private void addTask() {
+
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(TaskList.this);
         LayoutInflater layoutInflater = LayoutInflater.from(this);
 
@@ -111,6 +123,7 @@ public class TaskList extends AppCompatActivity {
 
         final EditText task = view.findViewById(R.id.dialogUserTitle);
         final EditText description = view.findViewById(R.id.dialogUserDesc);
+
 
         Button save = view.findViewById(R.id.add_button);
 

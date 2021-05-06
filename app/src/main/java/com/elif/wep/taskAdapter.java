@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,11 +46,15 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
 
 
 
+
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
+
         String id = model.getId();
+
+
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +127,7 @@ public class taskAdapter extends FirebaseRecyclerAdapter<TaskItem, taskAdapter.t
             description = itemView.findViewById(R.id.description);
             date = itemView.findViewById(R.id.date);
             mView = itemView;
+
 
         }
     }
