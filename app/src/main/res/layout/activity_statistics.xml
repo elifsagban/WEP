@@ -9,7 +9,7 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="0dp"
-        android:layout_height="230dp"
+        android:layout_height="200dp"
         android:id="@+id/animation_view"
         android:background="#17215A"
         app:lottie_rawRes="@raw/success"

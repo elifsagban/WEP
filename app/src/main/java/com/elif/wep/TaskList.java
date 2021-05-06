@@ -60,11 +60,6 @@ public class TaskList extends AppCompatActivity {
         recyclerViewTask = findViewById(R.id.recycleViewTask);
         fAuth = FirebaseAuth.getInstance();
 
-        userID = (fAuth.getCurrentUser()).getUid();
-        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
-        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
-
-
 
 
         if (fAuth.getCurrentUser() != null) {
@@ -96,9 +91,12 @@ public class TaskList extends AppCompatActivity {
 
 
     private void firebaseCallDB( ) {
+        userID = (fAuth.getCurrentUser()).getUid();
+        db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
+        recyclerViewTask.setLayoutManager(new LinearLayoutManager(this));
 
-            Query taskQuery = db.orderByChild("done").equalTo(false);
-            FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
+        Query taskQuery = db.orderByChild("done").equalTo(false);
+        FirebaseRecyclerOptions<TaskItem> options = new FirebaseRecyclerOptions.Builder<TaskItem>()
                     .setQuery(taskQuery, TaskItem.class)
                     .build();
 
