@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -24,7 +26,6 @@ public class Statistics extends AppCompatActivity {
     FirebaseAuth fAuth;
     DatabaseReference db;
     String userID;
-    RecyclerView.LayoutManager layoutManager;
     private RecyclerView recyclerViewStatistics;
     private statisticsAdapter statisticsAdapter;
 
@@ -35,9 +36,15 @@ public class Statistics extends AppCompatActivity {
 
         // nav bar
          navigationMenu();
+        fAuth = FirebaseAuth.getInstance();
 
-         firebaseAdapter();
+        if (fAuth.getCurrentUser() != null) {
+            firebaseAdapter();
+        }
+        else {
+            Toast.makeText(Statistics.this, "You need to register!", Toast.LENGTH_SHORT).show();
 
+        }
 
 
 
@@ -45,9 +52,16 @@ public class Statistics extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        super.onStart();
-        statisticsAdapter.startListening();
+
+        if (fAuth.getCurrentUser() != null) {
+            super.onStart();
+            statisticsAdapter.startListening();
+        } else {
+            super.onStart();
+
+        }
     }
+
 
     private void navigationMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -90,13 +104,11 @@ public class Statistics extends AppCompatActivity {
 
     private void firebaseAdapter() {
 
-        fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
         recyclerViewStatistics = findViewById(R.id.statisticsRecyclerView);
-        recyclerViewStatistics.setHasFixedSize(true);
-        recyclerViewStatistics.setLayoutManager(layoutManager);
+        recyclerViewStatistics.setLayoutManager(new LinearLayoutManager(this));
 
 
         Query taskQuery = db.orderByChild("done").equalTo(true);
@@ -107,6 +119,7 @@ public class Statistics extends AppCompatActivity {
 
         statisticsAdapter = new statisticsAdapter(options);
         recyclerViewStatistics.setAdapter(statisticsAdapter);
+
     }
 
 

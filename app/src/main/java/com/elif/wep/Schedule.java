@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,9 @@ public class Schedule extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
+
+        fAuth = FirebaseAuth.getInstance();
+
         switchCompat = findViewById(R.id.pomodoroSwitch);
         SharedPreferences sharedPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
         switchCompat.setChecked(sharedPreferences.getBoolean("value", true));
@@ -60,15 +64,28 @@ public class Schedule extends AppCompatActivity {
         // navigation Menu
         navigationMenu();
 
-        firebaseAdapter();
+        if (fAuth.getCurrentUser() != null) {
+            firebaseAdapter();
+        }
+        else {
+            Toast.makeText(Schedule.this, "You need to register!", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
     @Override
     protected void onStart() {
-        super.onStart();
-        scheduleAdapter.startListening();
+
+        if (fAuth.getCurrentUser() != null) {
+            super.onStart();
+            scheduleAdapter.startListening();
+        } else {
+            super.onStart();
+
+        }
     }
+
 
     private void navigationMenu() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -110,7 +127,6 @@ public class Schedule extends AppCompatActivity {
     }
 
     private void firebaseAdapter() {
-        fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
         db = FirebaseDatabase.getInstance().getReference().child("tasks").child(userID);
 
