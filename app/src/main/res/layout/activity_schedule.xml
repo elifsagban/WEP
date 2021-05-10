@@ -7,20 +7,38 @@
     tools:context=".Schedule">
 
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/pomodoroSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Pomodoro Plan"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finished Tasks"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/pomodoroSwitch"
+        app:layout_constraintBottom_toTopOf="@id/doneTaskList"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doneTaskList"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="675dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemBackground="@color/white"
         android:background="@color/white"
+        app:itemBackground="@color/white"
         app:itemIconTint="@color/purple_700"
         app:itemTextColor="@color/purple_700"
         app:layout_constraintBottom_toBottomOf="parent"

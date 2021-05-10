@@ -1,6 +1,8 @@
 package com.elif.wep;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,12 +35,14 @@ public class TaskTimer extends AppCompatActivity {
     private Button pauseButton;
     private Button saveButton;
     private TaskItem taskItem;
-
+    private Boolean value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer_design);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
+        value = sharedPreferences.getBoolean("value", true);
+        System.out.println(value);
 
         Chronometer chronometer = new Chronometer();
         TextView time_view = findViewById(R.id.time_view);
@@ -92,7 +96,7 @@ public class TaskTimer extends AppCompatActivity {
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
-        chronometer.runTimer(time_view);
+        chronometer.runTimer(time_view, value);
         startChronometer(chronometer);
         pauseChronometer(chronometer);
         saveChronometer(chronometer);

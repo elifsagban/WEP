@@ -1,14 +1,19 @@
 package com.elif.wep;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-class Chronometer {
+
+class Chronometer extends AppCompatActivity {
 
     ArrayList<Integer> avg_duration = new ArrayList();
     ArrayList<Integer> items_duration = new ArrayList();
@@ -20,6 +25,7 @@ class Chronometer {
     private Timestamp duration_time;
     private boolean running;
     private boolean wasRunning;
+    Schedule schedule;
 
     public ArrayList getItemsDuration() {
         return avg_duration;
@@ -87,12 +93,14 @@ class Chronometer {
 
 
     protected void onPause() {
+        super.onPause();
         wasRunning = running;
         running = false;
     }
 
 
     protected void onResume() {
+        super.onResume();
         if (wasRunning) {
             running = true;
         }
@@ -137,6 +145,7 @@ class Chronometer {
             int diff = (int) (getStart_time_break().getTime() - getBreak_time().getTime());
             items_break.add(diff);
             System.out.println("break time result " + diff);
+
 
         }
     }
@@ -194,7 +203,8 @@ class Chronometer {
     // The runTimer() method uses a Handler
     // to increment the seconds and
     // update the text view.
-    protected void runTimer(TextView timeView) {
+    protected void runTimer(TextView timeView, Boolean value) {
+
 
         // Get the text view.
         // final TextView timeView = (TextView) findViewById(R.id.time_view);
@@ -223,10 +233,19 @@ class Chronometer {
                 // Set the text view text.
                 timeView.setText(time);
 
+
+
                 // If running is true, increment the
                 // seconds variable.
                 if (running) {
                     seconds++;
+
+                    if (value){
+                        if((((seconds % 3600) / 60) % 25 == 0)){
+                            onClickStop();
+                        }
+                    }
+
                 }
 
                 // Post the code again
