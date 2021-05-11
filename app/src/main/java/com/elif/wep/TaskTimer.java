@@ -16,6 +16,7 @@ import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,6 +30,7 @@ public class TaskTimer extends AppCompatActivity {
     DatabaseReference dbTasks;
     String userID;
     String id;
+    LottieAnimationView lottieAnimationView;
     private int seconds = 0;
     // Is the stopwatch running?
     private boolean running;
@@ -89,6 +91,10 @@ public class TaskTimer extends AppCompatActivity {
 
 
         }
+    }
+
+    public LottieAnimationView getLottieAnimationView() {
+        return lottieAnimationView;
     }
 
     // Save the state of the stopwatch
