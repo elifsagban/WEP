@@ -8,6 +8,7 @@
     android:id="@+id/my_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText">
 
@@ -39,8 +40,8 @@
             android:layout_height="wrap_content"
             app:itemBackground="@color/white"
             android:background="@color/white"
-            app:itemIconTint="@color/purple_700"
-            app:itemTextColor="@color/purple_700"
+            app:itemIconTint="@color/color4"
+            app:itemTextColor="@color/color4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

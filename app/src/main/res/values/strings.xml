@@ -8,4 +8,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save_if_you_finished_the_task_or_you_can_pause_and_continue_later">Save if you finished the task. Or you can pause and continue later.</string>
+    <string name="do_you_want_to_finish_the_task">Do you want to finish the task?</string>
 </resources>

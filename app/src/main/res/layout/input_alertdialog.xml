@@ -7,22 +7,24 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
         app:contentPadding="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:background="#FFFFFF"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/dialogTitle"
-                android:textColor="#A69B9B"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:layout_marginTop="5dp"
                 android:text="Create a New Task"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@color/color4"
+                android:textColorHint="#A69B9B"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,15 +38,14 @@
                 app:srcCompat="@mipmap/writing_foreground" />
 
 
-
             <TextView
                 android:id="@+id/msg"
-                android:textColor="#CAC2C2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:text="Tackle your goals in daily doses"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView2" />
@@ -56,6 +57,7 @@
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
                 android:text="Task Title"
+                android:textColor="@color/color2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/msg" />
@@ -64,13 +66,14 @@
                 android:id="@+id/dialogUserTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
                 android:ems="10"
-                android:hint="task name"
                 android:includeFontPadding="true"
                 android:inputType="text"
                 android:padding="20dp"
                 android:selectAllOnFocus="true"
                 android:singleLine="false"
+                android:textColor="@color/color4"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTheTask" />
@@ -82,6 +85,7 @@
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
                 android:text="Description"
+                android:textColor="@color/color2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dialogUserTitle" />
@@ -90,13 +94,13 @@
                 android:id="@+id/dialogUserDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_edittext"
                 android:ems="10"
-                android:hint="description"
                 android:padding="20dp"
                 app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addDesc"
+                android:textColor="@color/color4"
                 app:layout_constraintStart_toStartOf="parent"
-                 />
+                app:layout_constraintTop_toBottomOf="@id/addDesc" />
 
             <TextView
                 android:id="@+id/addSpinner"
@@ -105,6 +109,7 @@
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
                 android:text="Select Priority"
+                android:textColor="@color/color2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dialogUserDesc" />
@@ -128,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
                 android:textColor="@color/white"
-                android:backgroundTint="#17215A"
+                android:backgroundTint="@color/color4"
                 android:paddingLeft="20dp"
                 android:paddingTop="8dp"
                 android:paddingRight="20dp"

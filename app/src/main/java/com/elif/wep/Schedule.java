@@ -31,33 +31,109 @@ public class Schedule extends AppCompatActivity {
     String userID;
     scheduleAdapter scheduleAdapter;
     SwitchCompat switchCompat;
-
+    SwitchCompat switchCompatMinutes;
+    SwitchCompat switchCompatHour;
+    Boolean switchCheckPom;
+    Boolean switchCheckMin;
+    Boolean switchCheckHr;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
         fAuth = FirebaseAuth.getInstance();
-
+        switchCheckHr = false;
+        switchCheckMin = false;
+        switchCheckPom = false;
         switchCompat = findViewById(R.id.pomodoroSwitch);
-        SharedPreferences sharedPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
-        switchCompat.setChecked(sharedPreferences.getBoolean("value", true));
+        SharedPreferences sharedPreferences = getSharedPreferences("savePom", Context.MODE_PRIVATE);
+        switchCompat.setChecked(sharedPreferences.getBoolean("valuePom", false));
 
         switchCompat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (switchCompat.isChecked()){
-                    SharedPreferences.Editor editor = getSharedPreferences("save", Context.MODE_PRIVATE).edit();
-                    editor.putBoolean("value", switchCompat.isChecked());
+                if (switchCompat.isChecked() && ((switchCheckHr || switchCheckMin) == false)){
+                    switchCheckPom = true;
+                    SharedPreferences.Editor editor = getSharedPreferences("savePom", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("valuePom", switchCompat.isChecked());
                     editor.apply();
                     switchCompat.setChecked(true);
-                    System.out.println("Pomodoro is enabled!");
+                    Toast.makeText(Schedule.this, "Pomodoro Plan is enabled!",
+                            Toast.LENGTH_LONG).show();
+                    System.out.println("Pomodoro Plan is enabled!");
 
                 }else{
-                    SharedPreferences.Editor editor= getSharedPreferences("save", Context.MODE_PRIVATE).edit();
-                    editor.putBoolean("value", false);
+                    if(!switchCheckPom){
+                        Toast.makeText(Schedule.this, "Please choose only 1 plan!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    switchCheckPom = false;
+                    SharedPreferences.Editor editor= getSharedPreferences("savePom", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("valuePom", false);
                     editor.apply();
                     switchCompat.setChecked(false);
+                }
+            }
+        });
+        switchCompatMinutes = findViewById(R.id.minutesSwitch);
+        SharedPreferences sharedPreferencesMin = getSharedPreferences("saveMin", Context.MODE_PRIVATE);
+        switchCompatMinutes.setChecked(sharedPreferencesMin.getBoolean("valueMin", false));
+
+        switchCompatMinutes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (switchCompatMinutes.isChecked() && ((switchCheckHr || switchCheckPom) == false)){
+                    switchCheckMin = true;
+                    SharedPreferences.Editor editor = getSharedPreferences("saveMin", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("valueMin", switchCompatMinutes.isChecked());
+                    editor.apply();
+                    switchCompatMinutes.setChecked(true);
+                    Toast.makeText(Schedule.this, "40 Minutes Plan is enabled!",
+                            Toast.LENGTH_LONG).show();
+                    System.out.println("40 Minutes Plan is enabled!");
+
+                }else{
+                    if(!switchCheckMin){
+                        Toast.makeText(Schedule.this, "Please choose only 1 plan!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    switchCheckMin = false;
+                    SharedPreferences.Editor editor= getSharedPreferences("saveMin", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("valueMin", false);
+                    editor.apply();
+                    switchCompatMinutes.setChecked(false);
+
+                }
+            }
+        });
+        switchCompatHour = findViewById(R.id.hourSwitch);
+        SharedPreferences sharedPreferencesHour = getSharedPreferences("saveHour", Context.MODE_PRIVATE);
+        switchCompatHour.setChecked(sharedPreferencesHour.getBoolean("valueHour", false));
+
+        switchCompatHour.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if (switchCompatHour.isChecked() && ((switchCheckMin || switchCheckPom) == false)){
+                    switchCheckHr = true;
+                    SharedPreferences.Editor editor = getSharedPreferences("saveHour", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("valueHour", switchCompatHour.isChecked());
+                    editor.apply();
+                    switchCompatHour.setChecked(true);
+                    Toast.makeText(Schedule.this, "1 Hour Plan is enabled!",
+                            Toast.LENGTH_LONG).show();
+                    System.out.println("1 Hour Plan is enabled!");
+
+                }else{
+                    if(!switchCheckHr){
+                        Toast.makeText(Schedule.this, "Please choose only 1 plan!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    switchCheckHr = false;
+                    SharedPreferences.Editor editor= getSharedPreferences("saveHour", Context.MODE_PRIVATE).edit();
+                    editor.putBoolean("valueHour", false);
+                    editor.apply();
+                    switchCompatHour.setChecked(false);
                 }
             }
         });

@@ -194,7 +194,7 @@ class Chronometer {
     // The runTimer() method uses a Handler
     // to increment the seconds and
     // update the text view.
-    protected void runTimer(TextView timeView, Boolean value) {
+    protected void runTimer(TextView timeView, Boolean valuePom, Boolean valueMin, Boolean valueHour) {
 
         // Get the text view.
         // final TextView timeView = (TextView) findViewById(R.id.time_view);
@@ -227,8 +227,16 @@ class Chronometer {
                 // seconds variable.
                 if (running) {
                     seconds++;
-                    if (value){ //if pomodoro switch is checked
-                        if((((seconds % 3600) / 60) % 25 == 0)){ // pause chronometer every 25 mins
+                    if (valuePom){ //if pomodoro switch is checked
+                        if(((seconds % 60) % 2 == 0)){ // pause chronometer every 25 mins
+                            onClickStop();
+                        }
+                    }else if(valueMin){ //if 40 Mins switch is checked
+                        if(((seconds % 60) % 3 == 0)){ // pause chronometer every 40 mins
+                            onClickStop();
+                        }
+                    }else if(valueHour){ //if 1 Hour switch is checked
+                        if(((seconds % 60) % 5 == 0)){ // pause chronometer every 1 hour
                             onClickStop();
                         }
                     }

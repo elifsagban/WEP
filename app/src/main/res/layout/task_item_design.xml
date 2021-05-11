@@ -7,9 +7,13 @@
    >
 
     <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardBackgroundColor="@color/white"
         android:focusable="auto"
+        android:layout_margin="5dp"
         >
 
 
@@ -49,8 +53,8 @@
                     android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#5C5858"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"/>
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                    android:textColor="#000000" />
 
             </LinearLayout>
 
@@ -58,12 +62,11 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:includeFontPadding="true"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="5dp"
+                android:includeFontPadding="true"
                 android:text="12.20"
-                android:textColor="#5C5858"
-                />
+                android:textColor="#000000" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
