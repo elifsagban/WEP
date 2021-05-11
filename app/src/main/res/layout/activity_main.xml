@@ -7,48 +7,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity"
     tools:ignore="HardcodedText">
 
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/animation_view"
-            app:lottie_rawRes="@raw/working"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/linearLayout"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/titleCard"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/color2"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toTopOf="@id/animation_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-
-        <LinearLayout
-            android:id="@id/linearLayout"
+        <TextView
+            android:id="@+id/appName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-            app:layout_constraintTop_toBottomOf="@id/animation_view">
+            android:layout_gravity="center"
+            android:text="Work Efficiency Provider"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCard"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/working" />
 
+    <Button
+        android:id="@+id/startWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/color4"
+        android:padding="8dp"
+        android:text="START WORKING"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animation_view" />
 
-
-        </LinearLayout>
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemBackground="@color/white"
             android:background="@color/white"
-            app:itemIconTint="@color/purple_700"
-            app:itemTextColor="@color/purple_700"
+            app:itemIconTint="@color/color4"
+            app:itemTextColor="@color/color4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

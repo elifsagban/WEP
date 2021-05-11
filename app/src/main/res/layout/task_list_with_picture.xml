@@ -5,27 +5,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/white">
 
 
-
-    <com.airbnb.lottie.LottieAnimationView
+    <androidx.cardview.widget.CardView
+        android:id="@+id/titleCard"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/animation_view"
-        android:background="#17215A"
-        app:lottie_rawRes="@raw/tasklist"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/color2"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toTopOf="@id/recycleViewTask"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"/>
+        app:layout_constraintVertical_bias="0.0">
 
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Task List"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTaskList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="128dp"
+        android:backgroundTint="@color/color4"
+        android:src="@drawable/add_plus"
+        app:layout_constraintBottom_toTopOf="@id/recycleViewTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCard" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTask"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
@@ -37,16 +65,7 @@
     </androidx.recyclerview.widget.RecyclerView>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTaskList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#17215A"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/animation_view"
-        android:src="@drawable/add_plus"
-        android:layout_margin="16dp" />
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
@@ -54,8 +73,8 @@
         android:layout_height="wrap_content"
         app:itemBackground="@color/white"
         android:background="@color/white"
-        app:itemIconTint="@color/purple_700"
-        app:itemTextColor="@color/purple_700"
+        app:itemIconTint="@color/color4"
+        app:itemTextColor="@color/color4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,5 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">#FF3700B3</color>
+    <color name="color1">#C6D8D9DD</color>
+    <color name="color2">#FFC70024</color>
+    <color name="color3">#497BDD</color>
+    <color name="color4">#FF264D9A</color>
+
+
+
+
 
 </resources>

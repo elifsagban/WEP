@@ -14,30 +14,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="30dp">
+            android:padding="16dp">
 
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_height="wrap_content"
                 app:srcCompat="@mipmap/reward_foreground" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="Do you want to finish the task?"
-                android:textSize="24sp"
+                android:text="@string/do_you_want_to_finish_the_task"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView2" />
@@ -47,7 +48,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Save if you finished the task. Or you can pause and continue later."
+                android:text="@string/save_if_you_finished_the_task_or_you_can_pause_and_continue_later"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
@@ -57,8 +60,8 @@
                 android:id="@id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_margin="10dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/msg">
@@ -72,7 +75,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:backgroundTint="#17215A"
+                    android:backgroundTint="@color/color4"
                     android:paddingLeft="20dp"
                     android:paddingTop="8dp"
                     android:paddingRight="20dp"
@@ -85,11 +88,11 @@
                     style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#FFFFFF"
-                    android:backgroundTint="#17215A"
+                    android:backgroundTint="@color/color4"
                     android:paddingLeft="20dp"
                     android:paddingTop="8dp"
                     android:paddingRight="20dp"

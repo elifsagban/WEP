@@ -3,6 +3,9 @@ package com.elif.wep;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,14 +13,34 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
 
+    private Button workBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        workBtn = findViewById(R.id.startWork);
+
+        workBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startWork();
+            }
+        });
+
+
+
+
+
         // navigation menu
         navigationMenu();
 
+    }
+
+    private void startWork() {
+        Intent intent = new Intent(this, TaskList.class);
+        startActivity(intent);
     }
 
     private void navigationMenu() {

@@ -37,7 +37,9 @@ public class TaskTimer extends AppCompatActivity {
     private Button pauseButton;
     private Button saveButton;
     private TaskItem taskItem;
-    private Boolean value;
+    private Boolean valuePom;
+    private Boolean valueMin;
+    private Boolean valueHour;
     private Boolean startPress;
     private Boolean pausePress;
     private Boolean savePress;
@@ -45,10 +47,20 @@ public class TaskTimer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timer_design);
-        //get switch button value from schedule activity
-        SharedPreferences sharedPreferences = getSharedPreferences("save", Context.MODE_PRIVATE);
-        value = sharedPreferences.getBoolean("value", true);
-        System.out.println(value);
+        //get switch button value for Pomodoro Plan from schedule activity
+        SharedPreferences sharedPreferences = getSharedPreferences("savePom", Context.MODE_PRIVATE);
+        valuePom = sharedPreferences.getBoolean("valuePom", true);
+        System.out.println("Pomodoro switch value: "+valuePom);
+
+        //get switch button value for 40 Minutes Plan from schedule activity
+        SharedPreferences sharedPreferencesMin = getSharedPreferences("saveMin", Context.MODE_PRIVATE);
+        valueMin = sharedPreferencesMin.getBoolean("valueMin", true);
+        System.out.println("40 Minutes switch value: "+valueMin);
+
+        //get switch button value for 1 Hour Plan from schedule activity
+        SharedPreferences sharedPreferencesHour = getSharedPreferences("saveHour", Context.MODE_PRIVATE);
+        valueHour = sharedPreferencesHour.getBoolean("valueHour", true);
+        System.out.println("1 Hour switch value: "+valueHour);
 
         Chronometer chronometer = new Chronometer();
         TextView time_view = findViewById(R.id.time_view);
@@ -102,7 +114,7 @@ public class TaskTimer extends AppCompatActivity {
             running = savedInstanceState.getBoolean("running");
             wasRunning = savedInstanceState.getBoolean("wasRunning");
         }
-        chronometer.runTimer(time_view, value);
+        chronometer.runTimer(time_view, valuePom, valueMin, valueHour);
         startChronometer(chronometer);
         pauseChronometer(chronometer);
         saveChronometer(chronometer);
@@ -218,11 +230,11 @@ public class TaskTimer extends AppCompatActivity {
 
     private void changeBtnColor(){
         if (pausePress){
-            pauseButton.setBackgroundColor(Color.parseColor("#8f36db"));
-            startButton.setBackgroundColor(Color.parseColor("#17215A"));
+            pauseButton.setBackgroundColor(Color.parseColor("#497BDD"));
+            startButton.setBackgroundColor(Color.parseColor("#FF264D9A"));
         }else if (startPress){
-            startButton.setBackgroundColor(Color.parseColor("#8f36db"));
-            pauseButton.setBackgroundColor(Color.parseColor("#17215A"));
+            startButton.setBackgroundColor(Color.parseColor("#497BDD"));
+            pauseButton.setBackgroundColor(Color.parseColor("#FF264D9A"));
         }
     }
 

@@ -4,34 +4,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Schedule">
 
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/pomodoroSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
-        android:text="Select Pomodoro Plan"
-        android:textColor="@color/purple_700"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@id/textView2"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/titleCard"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/color2"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintBottom_toTopOf="@id/planCard"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Schedule"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/planCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCard"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/minutesCard">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/pomodoroSwitch"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="Select Pomodoro Plan"
+            android:textColor="@color/color4"
+            app:trackTint="@color/color1"
+            app:thumbTint="@drawable/switch_thumb"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/minutesCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planCard"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/hourCard">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/minutesSwitch"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="Select 40 Minutes Plan"
+            android:textColor="@color/color4"
+            app:trackTint="@color/color1"
+            app:thumbTint="@drawable/switch_thumb"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/hourCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/minutesCard"
+        app:layout_constraintBottom_toTopOf="@id/textView2"
+        app:cardBackgroundColor="@color/white">
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/hourSwitch"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:text="Select 1 Hour Plan"
+            android:textColor="@color/color4"
+            app:trackTint="@color/color1"
+            app:thumbTint="@drawable/switch_thumb"
+            android:textSize="20sp" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Finished Tasks"
-        android:textColor="@color/purple_700"
+        android:textAlignment="center"
+        android:textColor="@color/color2"
         android:textSize="25sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/doneTaskList"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/pomodoroSwitch" />
+        app:layout_constraintTop_toBottomOf="@id/hourCard" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doneTaskList"
@@ -46,8 +136,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:itemBackground="@color/white"
-        app:itemIconTint="@color/purple_700"
-        app:itemTextColor="@color/purple_700"
+        app:itemIconTint="@color/color4"
+        app:itemTextColor="@color/color4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
