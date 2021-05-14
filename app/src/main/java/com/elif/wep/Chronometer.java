@@ -228,18 +228,19 @@ class Chronometer {
                 if (running) {
                     seconds++;
                     if (valuePom){ //if pomodoro switch is checked
-                        if(((seconds % 60) % 2 == 0)){ // pause chronometer every 25 mins
+                        if(seconds % 1500 == 0){ // pause chronometer every 25 mins
                             onClickStop();
                         }
                     }else if(valueMin){ //if 40 Mins switch is checked
-                        if(((seconds % 60) % 3 == 0)){ // pause chronometer every 40 mins
+                        if(seconds % 2400 == 0){ // pause chronometer every 40 mins
                             onClickStop();
                         }
                     }else if(valueHour){ //if 1 Hour switch is checked
-                        if(((seconds % 60) % 5 == 0)){ // pause chronometer every 1 hour
+                        if(seconds % 3600 == 0){ // pause chronometer every 1 hour
                             onClickStop();
                         }
                     }
+
                 }
 
                 // Post the code again

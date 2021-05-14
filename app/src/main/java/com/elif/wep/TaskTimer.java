@@ -45,6 +45,7 @@ public class TaskTimer extends AppCompatActivity {
     private Boolean startPress;
     private Boolean pausePress;
     private Boolean savePress;
+    LottieAnimationView animationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +77,7 @@ public class TaskTimer extends AppCompatActivity {
         startButton = findViewById(R.id.start_button);
         pauseButton = findViewById(R.id.pause_button);
         saveButton = findViewById(R.id.save_button);
-
+        animationView = findViewById(R.id.animation_view);
 
         fAuth = FirebaseAuth.getInstance();
         userID = Objects.requireNonNull(fAuth.getCurrentUser()).getUid();
@@ -91,11 +92,9 @@ public class TaskTimer extends AppCompatActivity {
 
 
         }
+
     }
 
-    public LottieAnimationView getLottieAnimationView() {
-        return lottieAnimationView;
-    }
 
     // Save the state of the stopwatch
     // if it's about to be destroyed.
@@ -124,6 +123,7 @@ public class TaskTimer extends AppCompatActivity {
         startChronometer(chronometer);
         pauseChronometer(chronometer);
         saveChronometer(chronometer);
+
     }
 
 
@@ -135,6 +135,8 @@ public class TaskTimer extends AppCompatActivity {
                 startPress = true;
                 pausePress = false;
                 changeBtnColor();
+                animationView.playAnimation();
+                animationView.loop(true);
 
             }
 
@@ -149,6 +151,8 @@ public class TaskTimer extends AppCompatActivity {
                 startPress = false;
                 chronometer.onClickStop();
                 changeBtnColor();
+                animationView.loop(false);
+
 
             }
         });
@@ -238,9 +242,11 @@ public class TaskTimer extends AppCompatActivity {
         if (pausePress){
             pauseButton.setBackgroundColor(Color.parseColor("#497BDD"));
             startButton.setBackgroundColor(Color.parseColor("#FF264D9A"));
+
         }else if (startPress){
             startButton.setBackgroundColor(Color.parseColor("#497BDD"));
             pauseButton.setBackgroundColor(Color.parseColor("#FF264D9A"));
+
         }
     }
 
